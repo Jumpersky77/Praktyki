@@ -1,3 +1,5 @@
+import Button from '@mui/material/Button';
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -6,7 +8,7 @@ type Props = { text: string }
 function Subject(props : Props) {
     return (
         <div>
-            <button>{props.text}</button>
+            <Button variant="outlined">{props.text}</Button>
         </div>
     )
 }
