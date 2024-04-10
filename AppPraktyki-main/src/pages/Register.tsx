@@ -8,10 +8,12 @@ import {
     TextField,
     Typography,
   } from "@mui/material";
-  import { LockOutlined } from "@mui/icons-material";
+  import { LockOutlined, Password } from "@mui/icons-material";
   import { useState } from "react";
   import { Link } from "react-router-dom";
-  
+  import { passwordValidation } from "../validation";
+  import { emailValidation } from "../validation";
+  import { nameValidation } from "../validation";
   const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -47,6 +49,7 @@ import {
                     autoFocus
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    helperText= {nameValidation(name)}
                   />
                 </Grid>
   
@@ -59,6 +62,7 @@ import {
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    helperText= {emailValidation(email)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -71,6 +75,7 @@ import {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    helperText= {passwordValidation(password)}
                   />
                 </Grid>
               </Grid>
