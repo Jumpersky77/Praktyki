@@ -18,6 +18,7 @@ const Subjects = () => {
     return (
         <>
             <Header accountName={"example"} subscriptionDaysLeft={"14"}></Header>
+            <br/>
             {_subjects.map((subject, index) => (
                 <Subject key={index} text={subject}></Subject>
             ))}
