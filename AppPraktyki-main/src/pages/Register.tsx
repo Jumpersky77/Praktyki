@@ -84,7 +84,7 @@ import {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link to="/login">Masz już konto? Zaloguj się</Link>
+                  <Link to="/">Masz już konto? Zaloguj się</Link>
                 </Grid>
               </Grid>
             </Box>
