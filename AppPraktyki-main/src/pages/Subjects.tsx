@@ -9,7 +9,7 @@ type Props = { text: string }
 function Subject(props : Props) {
     return (
         <div>
-            <Button variant="outlined">{props.text}</Button>
+            <Button variant="outlined" size="large">{props.text}</Button>
         </div>
     )
 }
