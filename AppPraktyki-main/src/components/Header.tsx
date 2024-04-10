@@ -7,7 +7,7 @@ type Props = { accountName: string, subscriptionDaysLeft: string }
 function Header(props : Props) {
     return (
         <div id="header">
-            <a href="/subjects"><HomeIcon fontSize={"large"}/></a>
+            <button><a href="/subjects"><HomeIcon fontSize={"large"}/></a></button>
             <button>Konto: {props.accountName}</button>
             <button>Subskrypcja ({props.subscriptionDaysLeft})</button>
             <button><LogoutIcon fontSize={"large"}/></button>
