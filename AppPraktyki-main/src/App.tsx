@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
 import Answers from "./pages/Answers";
+
 function App() {
   return (
   <>
