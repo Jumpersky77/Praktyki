@@ -42,7 +42,7 @@ const emailValidation=(emailInputValue:string)=>{
     }else if(!emailRegExp.test(emailInputValue)){
             emaMsg="Niepoprawny adres email";
     }
-    return (emaMsg==="" ? true :emaMsg + emailInputValue.length);
+    return (emaMsg==="" ? true :emaMsg);
 }
 
 const nameValidation=(nameInputValue:string)=>{
