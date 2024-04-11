@@ -5,6 +5,7 @@ import Header from "../components/Header";
 
 const _subjects = ["Matematyka", "Chemia", "Biologia"];
 
+
 const Subjects = () => {
     const navigate = useNavigate();
 
