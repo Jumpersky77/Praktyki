@@ -24,6 +24,15 @@ const  passwordValidation=(passwordInputValue:string)=>{
     }
     return (pasMsg==="" ? true :pasMsg);
 }
+const repeatPasswordValidation=(repeatPasswordInputValue:string,passwordInputValue:string)=>{
+   let rePasMsg ="";   
+
+   if(repeatPasswordInputValue != passwordInputValue){
+        rePasMsg="Hasło nie jest takie samo";
+   }
+   return (rePasMsg==="" ? true :rePasMsg);
+
+}
 
 const emailValidation=(emailInputValue:string)=>{
     const emailRegExp = /\S+@\S+\.\S+/;
@@ -46,4 +55,4 @@ const nameValidation=(nameInputValue:string)=>{
 
 
 
-export {passwordValidation,emailValidation, nameValidation};
+export {passwordValidation,repeatPasswordValidation,emailValidation, nameValidation};
