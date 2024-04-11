@@ -33,7 +33,7 @@ function Header(props: Props) {
                 sx={{
                     position: 'absolute',
                     top: '48px', // Ustaw odległość od góry
-                    left: '90%',
+                    right: '1%',
                     zIndex: 1, // Ustaw z-index, aby lista była widoczna na wierzchu
                     display: open ? 'block' : 'none'
                 }}
