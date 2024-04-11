@@ -28,10 +28,12 @@ const  passwordValidation=(passwordInputValue:string)=>{
 const emailValidation=(emailInputValue:string)=>{
     const emailRegExp = /\S+@\S+\.\S+/;
     let emaMsg="";
-    if (!emailRegExp.test(emailInputValue)) {
+    if (emailInputValue.length==0) {
+            emaMsg="";
+    }else if(!emailRegExp.test(emailInputValue)){
             emaMsg="Niepoprawny adres email";
     }
-    return (emaMsg==="" ? true :emaMsg);
+    return (emaMsg==="" ? true :emaMsg + emailInputValue.length);
 }
 
 const nameValidation=(nameInputValue:string)=>{
