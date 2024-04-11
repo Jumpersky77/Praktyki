@@ -1,29 +1,29 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
-
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import Header from "../components/Header";
 
 const _subjects = ["Matematyka", "Chemia", "Biologia"];
-type Props = { text: string }
-function Subject(props : Props) {
-    return (
-        <div>
-            <Button variant="outlined" size="large">{props.text}</Button>
-        </div>
-    )
-}
+
 
 const Subjects = () => {
+    const navigate = useNavigate();
+
+    const handleSubjectClick = (subject: string) => {
+        navigate(`/teachers?subject=${subject}`);
+    };
+
     return (
         <>
-            <Header accountName={"example"} subscriptionDaysLeft={"14"}></Header>
-            <br/>
+            <Header accountName={"example"} subscriptionDaysLeft={"14"} />
+            <br />
             {_subjects.map((subject, index) => (
-                <Subject key={index} text={subject}></Subject>
+                <div key={index}>
+                    <Button variant="outlined" onClick={() => handleSubjectClick(subject)}>{subject}</Button>
+                </div>
             ))}
         </>
-    )
+    );
 }
 
 export default Subjects;

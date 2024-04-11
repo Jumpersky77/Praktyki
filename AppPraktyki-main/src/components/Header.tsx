@@ -16,6 +16,7 @@ function Header(props: Props) {
         setOpen(!open);
     };
     return (
+
         <div id="header" style={{ position: 'relative' }}>
             <Toolbar>
                 <IconButton>
