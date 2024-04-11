@@ -11,9 +11,11 @@ import {
   import { LockOutlined, Password } from "@mui/icons-material";
   import { useState } from "react";
   import { Link } from "react-router-dom";
-  import { passwordValidation } from "../validation";
-  import { emailValidation } from "../validation";
-  import { nameValidation } from "../validation";
+  import { nameValidation } from "./validation";
+  import { emailValidation } from "./validation";
+  import { passwordValidation } from "./validation";
+  import "../style/styleR.css"
+
   const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -49,10 +51,10 @@ import {
                     autoFocus
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    helperText= {nameValidation(name)}
+                    helperText={nameValidation(name)}
                   />
                 </Grid>
-  
+
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -62,7 +64,7 @@ import {
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    helperText= {emailValidation(email)}
+                    helperText={emailValidation(email)}    
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -75,7 +77,7 @@ import {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    helperText= {passwordValidation(password)}
+                    helperText={passwordValidation(password)}
                   />
                 </Grid>
               </Grid>
@@ -89,7 +91,7 @@ import {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link to="/login">Masz już konto? Zaloguj się</Link>
+                  <Link to="/">Masz już konto? Zaloguj się</Link>
                 </Grid>
               </Grid>
             </Box>
