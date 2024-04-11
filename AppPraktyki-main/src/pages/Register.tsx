@@ -14,6 +14,7 @@ import {
   import { nameValidation } from "./validation";
   import { emailValidation } from "./validation";
   import { passwordValidation } from "./validation";
+  import "../style/styleR.css"
 
   const Register = () => {
     const [name, setName] = useState("");
@@ -53,7 +54,7 @@ import {
                     helperText={nameValidation(name)}
                   />
                 </Grid>
-  
+
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -63,7 +64,7 @@ import {
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    helperText={emailValidation(email)}
+                    helperText={emailValidation(email)}    
                   />
                 </Grid>
                 <Grid item xs={12}>
