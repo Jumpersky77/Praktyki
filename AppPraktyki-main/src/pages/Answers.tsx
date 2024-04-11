@@ -16,11 +16,11 @@ const _answers = [{
     author: "Bartosz",
     rating: "4.9",
 }]
-type Props = { id: string, name: string, author: string, rating: string }
+type Props = { id: string, name: string, author: string, rating: string, onAnswerClick: (id:string)=> void}
 const Answer = (props : Props) => {
     return (
             <div>
-                <Button variant="outlined" id={props.id}>{props.name}, dodał: {props.author}, ocena: {props.rating}</Button>
+                <Button onClick={()=>props.onAnswerClick(props.id)} variant="outlined" id={props.id}>{props.name}, dodał: {props.author}, ocena: {props.rating}</Button>
             </div>
     )
 }
@@ -43,7 +43,7 @@ const Teachers = () => {
                 {subject && <p>Przedmiot: {subject}</p>}
                 {teacher && <p>Nauczyciel: {teacher}</p>}
                 {subject === "Matematyka" && teacher === "Ewa Znamirowska" && _answers.map((answer, index) => (
-                    <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating}></Answer>
+                    <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating} onAnswerClick={handleAnswerClick}></Answer>
                 ))}
             </div>
         </>
