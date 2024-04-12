@@ -98,8 +98,8 @@ const Teachers = () => {
                 {subject && <p>Przedmiot: {subject}</p>}
                 {teacher && <p>Nauczyciel: {teacher}</p>}
                 {subject === "Matematyka" && teacher === "Ewa Znamirowska" && filteredAnswers.map((answer, index) => (
-                    <div>
-                    <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating} key={answer.id}></Answer>
+                    <div key={answer.id}>
+                    <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating} key={answer.id} onAnswerClick={handleAnswerClick}></Answer>
                     <br />
                     </div>
                 ))}
