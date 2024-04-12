@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
+import Answers from "./pages/Answers";
+
 function App() {
   return (
   <>
@@ -14,6 +16,8 @@ function App() {
       <Route path="/subjects" element={<Subjects />} />
       
       <Route path="/teachers" element={<Teachers />} />
+
+      <Route path="/answers" element={<Answers />} />
 
       <Route path="/" element={<Login />} /> |
     </Routes>
