@@ -6,6 +6,7 @@ import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
 import Answers from "./pages/Answers";
 import Details from "./pages/Details";
+
 function App() {
   return (
   <>
