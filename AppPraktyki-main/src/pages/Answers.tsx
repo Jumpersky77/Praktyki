@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Header from '../components/Header';
 import Answer from '../components/Answer';
+import "../style/styleR.css";
 
 const _answers = [{
     id: "0",
