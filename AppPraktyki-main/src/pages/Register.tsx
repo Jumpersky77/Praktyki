@@ -8,7 +8,7 @@ import {
     TextField,
     Typography,
   } from "@mui/material";
-  import { LockOutlined } from "@mui/icons-material";
+  import { LockOutlined, Password } from "@mui/icons-material";
   import { useState } from "react";
   import { Link } from "react-router-dom";
   import { nameValidation } from "./validation";

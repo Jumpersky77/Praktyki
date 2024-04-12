@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Subjects from "./pages/Subjects";
 import Teachers from "./pages/Teachers";
 import Answers from "./pages/Answers";
+import Details from "./pages/Details";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
 
       <Route path="/answers" element={<Answers />} />
 
-      <Route path="/" element={<Login />} /> |
+      <Route path="/" element={<Login />} />
+
+      <Route path="/details" element={<Details />} />
     </Routes>
 
   </>
