@@ -2,9 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Header from "../components/Header";
-
+import "../style/styleR.css"
 const _subjects = ["Matematyka", "Chemia", "Biologia"];
-
 
 const Subjects = () => {
     const navigate = useNavigate();
@@ -18,8 +17,15 @@ const Subjects = () => {
             <Header accountName={"example"} subscriptionDaysLeft={"14"} />
             <br />
             {_subjects.map((subject, index) => (
-                <div key={index}>
-                    <Button variant="outlined" onClick={() => handleSubjectClick(subject)}>{subject}</Button>
+                <div key={index} className='BlockContainer'>
+                    <Button className='Block'
+                        variant="outlined"
+                        color="primary"
+                        size="large"
+                        onClick={() => handleSubjectClick(subject)}
+                    >
+                        {subject}
+                    </Button>
                 </div>
             ))}
         </>

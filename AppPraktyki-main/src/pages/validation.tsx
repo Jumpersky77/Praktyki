@@ -24,6 +24,15 @@ const  passwordValidation=(passwordInputValue:string)=>{
     }
     return (pasMsg==="" ? true :pasMsg);
 }
+const repeatPasswordValidation=(repeatPasswordInputValue:string,passwordInputValue:string)=>{
+   let rePasMsg ="";   
+
+   if(repeatPasswordInputValue != passwordInputValue){
+        rePasMsg="Hasło nie jest takie samo";
+   }
+   return (rePasMsg==="" ? true :rePasMsg);
+
+}
 
 const emailValidation=(emailInputValue:string)=>{
     const emailRegExp = /\S+@\S+\.\S+/;
@@ -33,7 +42,7 @@ const emailValidation=(emailInputValue:string)=>{
     }else if(!emailRegExp.test(emailInputValue)){
             emaMsg="Niepoprawny adres email";
     }
-    return (emaMsg==="" ? true :emaMsg + emailInputValue.length);
+    return (emaMsg==="" ? true :emaMsg);
 }
 
 const nameValidation=(nameInputValue:string)=>{
@@ -46,4 +55,4 @@ const nameValidation=(nameInputValue:string)=>{
 
 
 
-export {passwordValidation,emailValidation, nameValidation};
+export {passwordValidation,repeatPasswordValidation,emailValidation, nameValidation};
