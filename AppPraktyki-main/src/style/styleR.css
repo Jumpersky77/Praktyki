@@ -2,12 +2,31 @@
     color: #df0303 !important;
   }
   .Block{
-  min-width: 60%  !important;
+  width: 250px  !important;
   border-radius: 20px  !important;
   min-height: 100px  !important;
   font-size: 25px  !important;
 }
 .BlockContainer{
-  text-align: center !important;
+  float: left !important;
   margin-top: 20px !important;
+  margin-left: 5%;
+}
+@media only screen and (max-width: 600px) {
+  .BlockContainer{
+    width: 100%;
+    text-align: center;
+  }
+}
+.title{
+  font-family: 'arial';
+  color: #1976d2;
+  text-align: center;
+  font-size: 50px;
+}
+.subtitle{
+  font-family: 'arial';
+  color: #1976d2;
+  text-align: center;
+  font-size: 30px;
 }

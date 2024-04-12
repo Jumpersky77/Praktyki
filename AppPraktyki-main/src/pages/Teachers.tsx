@@ -20,8 +20,8 @@ const Teachers = () => {
         <>
             <Header accountName={"example"} subscriptionDaysLeft={"14"} />
             <div>
-                <h2>Lista nauczycieli</h2>
-                {subject && <p>Przedmiot: {subject}</p>}
+            <h1 className='title'>Lista nauczycieli</h1>
+                {subject && <p className='subtitle'>Przedmiot: {subject}</p>}
                 {subject === "Matematyka" && teachers.map((teacher, index) => (
                     <div className='BlockContainer'>
                         <Button className="Block" variant="outlined" key={index} onClick={() => handleTeacherClick(teacher)}>{teacher}</Button>
