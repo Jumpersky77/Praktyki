@@ -14,12 +14,14 @@ import {
   import { nameValidation } from "./validation";
   import { emailValidation } from "./validation";
   import { passwordValidation } from "./validation";
+  import {repeatPasswordValidation} from "./validation";
   import "../style/styleR.css"
 
   const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
   
     const handleRegister = async () => {};
   
@@ -78,6 +80,19 @@ import {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     helperText={passwordValidation(password)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="repeatPassword"
+                    label="Powtórz Hasło"
+                    type="password"
+                    id="repeatPassword"
+                    value={repeatPassword}
+                    onChange={(e) => setRepeatPassword(e.target.value)}
+                    helperText={repeatPasswordValidation(repeatPassword,password)}
                   />
                 </Grid>
               </Grid>
