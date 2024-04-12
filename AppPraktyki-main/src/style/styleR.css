@@ -8,7 +8,7 @@
   font-size: 25px  !important;
 }
 .BlockAnswers{
-  width: 450px  !important;
+  width: 80%  !important;
   border-radius: 20px  !important;
   min-height: 100px  !important;
   font-size: 25px  !important;
@@ -17,6 +17,29 @@
   width: 100%;
   text-align: center;
   margin-top: 20px !important;
+}
+#ButtonAddAnswer{
+  width: 250px  !important;
+  border-radius: 20px  !important;
+  height: 50px  !important;
+  font-size: 20px  !important;
+  float: right;
+  margin-right: 5%;
+  
+}
+.SearchInput{
+  width: 250px  !important;
+  border-radius: 20px  !important;
+  height: 50px  !important;
+  font-size: 20px  !important;
+  color: #1976d2;
+  border: #1976d2 1px solid;
+  margin-left: 5%;
+  margin-bottom: 10px;
+}
+::placeholder{
+  color: #1976d2;
+  padding-left: 5px;
 }
 .BlockContainer{
   float: left !important;
@@ -51,13 +74,15 @@
 
 .answer-search-checkbox input[type="checkbox"] {
   appearance: none;
-  width: 26px;
-  height: 26px;
+  width: 35px;
+  height: 35px;
   border: 2px solid #2196f3; /* Kolor niebieski */
   border-radius: 4px;
   margin-right: 8px;
   cursor: pointer;
+  margin-left: 5%;
 }
+
 
 .answer-search-checkbox input[type="checkbox"]:checked {
   background-color: #2196f3; /* Kolor tła po zaznaczeniu */
@@ -68,8 +93,8 @@
   display: inline-block;
   font-size: 16px;
   color: #ffffff; /* Kolor symbolu */
-  line-height: 26px;
+  line-height: 35px;
   text-align: center;
-  width: 26px;
-  height: 26px;
+  width: 35px;
+  height: 35px;
 }
