@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Header from '../components/Header';
 import Answer from '../components/Answer';
+import "../style/styleR.css";
 
 const _answers = [{
     id: "0",
@@ -100,8 +101,8 @@ const Teachers = () => {
                 <Button variant='outlined'>Dodaj odpowiedź</Button>
                 
                 {subject === "Matematyka" && teacher === "Ewa Znamirowska" && filteredAnswers.map((answer, index) => (
-                    <div className='BlockAnswersContainer'>
-                    <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating} key={answer.id}></Answer>
+                    <div className='BlockAnswersContainer' key={answer.id}>
+                    <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating} key={answer.id} onAnswerClick={handleAnswerClick}></Answer>
                     <br />
                     </div>
                 ))}

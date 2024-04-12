@@ -42,3 +42,34 @@
   text-align: center;
   font-size: 30px;
 }
+
+.answer-search-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.answer-search-checkbox input[type="checkbox"] {
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border: 2px solid #2196f3; /* Kolor niebieski */
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.answer-search-checkbox input[type="checkbox"]:checked {
+  background-color: #2196f3; /* Kolor tła po zaznaczeniu */
+}
+
+.answer-search-checkbox input[type="checkbox"]:checked::before {
+  content: '✔'; /* Symbol zaznaczenia */
+  display: inline-block;
+  font-size: 16px;
+  color: #ffffff; /* Kolor symbolu */
+  line-height: 26px;
+  text-align: center;
+  width: 26px;
+  height: 26px;
+}
