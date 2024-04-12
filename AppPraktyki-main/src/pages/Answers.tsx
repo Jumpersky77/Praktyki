@@ -84,21 +84,23 @@ const Teachers = () => {
         <>
             <Header accountName={"example"} subscriptionDaysLeft={"14"} />
             <div>
-                <h2>Odpowiedzi</h2>
+                <h1 className='title'>Odpowiedzi</h1>
+                {subject && <p className='subtitle'>Przedmiot: {subject}</p>}
+                {teacher && <p className='subtitle'>Nauczyciel: {teacher}</p>}
                 <input
                     type="text"
                     placeholder="Szukaj odpowiedzi..."
                     value={searchTerm}
                     onChange={handleInputChange}
                 />
-                <Checkbox value={"kartkówka"}></Checkbox>
+                <span className='checkboxes'><Checkbox value={"kartkówka"}></Checkbox>
                 <Checkbox value={"sprawdzian"}></Checkbox>
-                <Checkbox value={"inne"}></Checkbox>
+                <Checkbox value={"inne"}></Checkbox></span>
+                
                 <Button variant='outlined'>Dodaj odpowiedź</Button>
-                {subject && <p>Przedmiot: {subject}</p>}
-                {teacher && <p>Nauczyciel: {teacher}</p>}
+                
                 {subject === "Matematyka" && teacher === "Ewa Znamirowska" && filteredAnswers.map((answer, index) => (
-                    <div>
+                    <div className='BlockAnswersContainer'>
                     <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating} key={answer.id}></Answer>
                     <br />
                     </div>
