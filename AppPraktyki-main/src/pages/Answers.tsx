@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Header from '../components/Header';
+import AddIcon from '@mui/icons-material/Add';
+import IconButton from '@mui/material/IconButton';
 
 const _answers = [{
     id: "0",
@@ -34,6 +36,9 @@ const Teachers = () => {
     const handleAnswerClick = (answerID: string) => {
         navigate(`/details?answerid=${answerID}`);
     };
+    const handleAddAnswerClick=(subject:string, teacher:string)=>{
+        navigate(`/addanswer?subject=${subject}&teacher=${teacher}`)
+    }
 
     return (
         <>
@@ -45,6 +50,11 @@ const Teachers = () => {
                 {subject === "Matematyka" && teacher === "Ewa Znamirowska" && _answers.map((answer, index) => (
                     <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating} onAnswerClick={handleAnswerClick}></Answer>
                 ))}
+            </div>
+            <div>
+                <IconButton aria-label="add" size='large' onClick={()=>handleAddAnswerClick(String(subject), String(teacher))}>
+                    <AddIcon />
+                </IconButton>
             </div>
         </>
     );

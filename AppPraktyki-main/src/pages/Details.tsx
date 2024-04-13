@@ -49,14 +49,7 @@ const commentblock=(id:number, aid:number)=>{
 const Details = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const subject = searchParams.get('subject');
-    const teacher = searchParams.get('teacher');
     const answerID=Number(searchParams.get('answerid'));
-    //const navigate = useNavigate();
-    // const handleAnswerClick = (answerID: string) => {
-    //     navigate(`/details?answerid=${answerID}`);
-    // };
-
     return (
         <>
             <Header accountName={"example"} subscriptionDaysLeft={"14"} />
@@ -71,18 +64,7 @@ const Details = () => {
                 {_comments.map((com, index) => (
                     commentblock(index, answerID)
             ))
-                
-                
-                
-                
-                
-                
-                
-                /* {_comments.map((com, index) => (
-                    if(com.id_details==answerID){
-                        commentblock(com.id_User)
-                    }
-                ))} */}
+        }
             </div>
         </>
     );
