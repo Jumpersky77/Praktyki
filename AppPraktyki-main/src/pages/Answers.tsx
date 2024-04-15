@@ -3,13 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Header from '../components/Header';
-<<<<<<< HEAD
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
-=======
 import Answer from '../components/Answer';
 import "../style/styleR.css";
->>>>>>> main
 
 const _answers = [{
     id: "0",
@@ -96,7 +93,7 @@ const Teachers = () => {
                 <h1 className='title'>Odpowiedzi</h1>
                 {subject && <p className='subtitle'>Przedmiot: {subject}</p>}
                 {teacher && <p className='subtitle'>Nauczyciel: {teacher}</p>}
-                <Button id='ButtonAddAnswer' variant='outlined'>Dodaj odpowiedź</Button>
+                <Button id='ButtonAddAnswer' variant='outlined' onClick={()=>handleAddAnswerClick(String(subject), String(teacher))}>Dodaj odpowiedź</Button>
                 <input className='SearchInput'
                     type="text"
                     placeholder="Szukaj odpowiedzi..."
@@ -115,11 +112,6 @@ const Teachers = () => {
                     <br />
                     </div>
                 ))}
-            </div>
-            <div>
-                <IconButton aria-label="add" size='large' onClick={()=>handleAddAnswerClick(String(subject), String(teacher))}>
-                    <AddIcon />
-                </IconButton>
             </div>
         </>
     );

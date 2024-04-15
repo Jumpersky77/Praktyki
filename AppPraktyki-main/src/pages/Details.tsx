@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Header from '../components/Header';
 import { List } from '@mui/material';
+import { Link } from "react-router-dom";
 
 const _details = [{
     id: "0",
