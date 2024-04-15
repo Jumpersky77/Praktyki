@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Header from "../components/Header";
 import "../style/styleR.css"
-const _subjects = ["Matematyka", "Chemia", "Biologia"];
+const _subjects = ["Matematyka", "Chemia", "Biologia", "Fizyka", "Wychowanie Fizyczne", "Język Polski", "Język Angielski"];
 
 const Subjects = () => {
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Subjects = () => {
     return (
         <>
             <Header accountName={"example"} subscriptionDaysLeft={"14"} />
-            <br />
+            <h1 className='title'>Lista Przedmiotów</h1>
             {_subjects.map((subject, index) => (
                 <div key={index} className='BlockContainer'>
                     <Button className='Block'

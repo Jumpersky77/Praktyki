@@ -2,12 +2,99 @@
     color: #df0303 !important;
   }
   .Block{
-  min-width: 60%  !important;
+  width: 250px  !important;
   border-radius: 20px  !important;
   min-height: 100px  !important;
   font-size: 25px  !important;
 }
-.BlockContainer{
-  text-align: center !important;
+.BlockAnswers{
+  width: 80%  !important;
+  border-radius: 20px  !important;
+  min-height: 100px  !important;
+  font-size: 25px  !important;
+}
+.BlockAnswersContainer{
+  width: 100%;
+  text-align: center;
   margin-top: 20px !important;
+}
+#ButtonAddAnswer{
+  width: 250px  !important;
+  border-radius: 20px  !important;
+  height: 50px  !important;
+  font-size: 20px  !important;
+  float: right;
+  margin-right: 5%;
+  
+}
+.SearchInput{
+  width: 250px  !important;
+  border-radius: 20px  !important;
+  height: 50px  !important;
+  font-size: 20px  !important;
+  color: #1976d2;
+  border: #1976d2 1px solid;
+  margin-left: 5%;
+  margin-bottom: 10px;
+}
+::placeholder{
+  color: #1976d2;
+  padding-left: 5px;
+}
+.BlockContainer{
+  float: left !important;
+  margin-top: 20px !important;
+  padding-left: 5%;
+}
+@media only screen and (max-width: 600px) {
+  .BlockContainer{
+    width: 100%;
+    text-align: center;
+    padding: 0;
+  }
+}
+.title{
+  font-family: 'arial';
+  color: #1976d2;
+  text-align: center;
+  font-size: 50px;
+}
+.subtitle{
+  font-family: 'arial';
+  color: #1976d2;
+  text-align: center;
+  font-size: 30px;
+}
+
+.answer-search-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.answer-search-checkbox input[type="checkbox"] {
+  appearance: none;
+  width: 35px;
+  height: 35px;
+  border: 2px solid #2196f3; /* Kolor niebieski */
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+  margin-left: 5%;
+}
+
+
+.answer-search-checkbox input[type="checkbox"]:checked {
+  background-color: #2196f3; /* Kolor tła po zaznaczeniu */
+}
+
+.answer-search-checkbox input[type="checkbox"]:checked::before {
+  content: '✔'; /* Symbol zaznaczenia */
+  display: inline-block;
+  font-size: 16px;
+  color: #ffffff; /* Kolor symbolu */
+  line-height: 35px;
+  text-align: center;
+  width: 35px;
+  height: 35px;
 }
