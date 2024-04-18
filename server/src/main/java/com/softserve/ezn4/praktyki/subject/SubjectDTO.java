@@ -2,7 +2,7 @@ package com.softserve.ezn4.praktyki.subject;
 
 public class SubjectDTO {
     private Long id;
-    private String name;
+    private String nameSubject;
 
     public Long getId() {
         return id;
@@ -13,11 +13,11 @@ public class SubjectDTO {
     }
 
     public String getName() {
-        return name;
+        return nameSubject;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nameSubject = name;
     }
 
 

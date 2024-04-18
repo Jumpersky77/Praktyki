@@ -15,7 +15,7 @@ public class SubjectDAO {
 
     public Optional<SubjectDTO> getSubject(Long id) {
         var sql = """
-                SELECT id, name
+                SELECT id, namesubject
                 FROM subject
                 WHERE id = ?
                  """;
@@ -26,7 +26,7 @@ public class SubjectDAO {
 
     public int insertSubject(SubjectDTO subject) {
         var sql = """
-                INSERT INTO subject(name)
+                INSERT INTO subject(namesubject)
                 VALUES (?, ?);
                  """;
         return jdbcTemplate.update(
