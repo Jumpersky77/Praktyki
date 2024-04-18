@@ -14,7 +14,7 @@ public class TeacherController {
     }
 
     @GetMapping(value =  {"/{id}"}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Optional<TeacherDTO> getTeacher(@PathVariable Long id) {
+    public Optional<TeacherDTO> getTeacher(@PathVariable Long id){
         return teacherRepository.getTeacher(id);
     }
 }

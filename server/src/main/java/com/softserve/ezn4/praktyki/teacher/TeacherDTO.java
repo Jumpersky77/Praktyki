@@ -1,7 +1,7 @@
 package com.softserve.ezn4.praktyki.teacher;
 
 public class TeacherDTO {
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
 
