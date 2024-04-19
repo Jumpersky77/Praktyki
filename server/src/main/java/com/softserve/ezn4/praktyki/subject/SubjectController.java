@@ -4,10 +4,10 @@ import org.springframework.http.MediaType;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/subject")
+@RequestMapping(path = "/")
 public class SubjectController {
 
     private final SubjectDAO subjectRepository;
@@ -16,8 +16,9 @@ public class SubjectController {
         this.subjectRepository = subjectRepository;
     }
 
-    @GetMapping(value = {"/{id}"}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Optional<SubjectDTO> getSubject(@PathVariable Long id) {
-        return subjectRepository.getSubject(id);
+    @GetMapping(value = {"/subjects"}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<SubjectDTO> getAllSubjects() {
+        return subjectRepository.getAllSubjects();
     }
 }
