@@ -1,6 +1,7 @@
 package com.softserve.ezn4.praktyki.subject;
 
 import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
