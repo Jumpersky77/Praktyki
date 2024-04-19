@@ -2,7 +2,8 @@ package com.softserve.ezn4.praktyki.subject;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
+import java.util.List;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import java.util.Optional;
 
 @Repository
@@ -22,6 +23,14 @@ public class SubjectDAO {
         return jdbcTemplate.query(sql, new SubjectMapper(), id)
                 .stream()
                 .findFirst();
+    }
+
+    public List<SubjectDTO> getAllSubjects() {
+        var sql = """
+                SELECT id, namesubject
+                FROM subject
+                 """;
+        return jdbcTemplate.query(sql, new SubjectMapper());
     }
 
     public int insertSubject(SubjectDTO subject) {
