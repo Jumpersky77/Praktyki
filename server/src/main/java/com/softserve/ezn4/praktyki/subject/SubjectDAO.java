@@ -3,7 +3,7 @@ package com.softserve.ezn4.praktyki.subject;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public class SubjectDAO {
@@ -13,25 +13,11 @@ public class SubjectDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Optional<SubjectDTO> getSubject(Long id) {
+    public List<SubjectDTO> findAll() {
         var sql = """
-                SELECT id, name
-                FROM subject
-                WHERE id = ?
+                SELECT id, namesubject
+                FROM SUBJECT
                  """;
-        return jdbcTemplate.query(sql, new SubjectMapper(), id)
-                .stream()
-                .findFirst();
-    }
-
-    public int insertSubject(SubjectDTO subject) {
-        var sql = """
-                INSERT INTO subject(name)
-                VALUES (?, ?);
-                 """;
-        return jdbcTemplate.update(
-                sql,
-                subject.getName()
-        );
+        return jdbcTemplate.query(sql, new SubjectMapper());
     }
 }
