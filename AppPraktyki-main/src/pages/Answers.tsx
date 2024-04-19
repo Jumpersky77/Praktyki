@@ -3,7 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Header from '../components/Header';
+import AddIcon from '@mui/icons-material/Add';
+import IconButton from '@mui/material/IconButton';
 import Answer from '../components/Answer';
+import "../style/styleR.css";
 
 const _answers = [{
     id: "0",
@@ -72,6 +75,9 @@ const Teachers = () => {
     const handleAnswerClick = (answerID: string) => {
         navigate(`/details?answerid=${answerID}`);
     };
+    const handleAddAnswerClick=(subject:string, teacher:string)=>{
+        navigate(`/addanswer?subject=${subject}&teacher=${teacher}`)
+    }
 
     const filteredAnswers = _answers.filter(answer => {
         if (searchTypes.length > 0 && !searchTypes.includes(answer.type)) {
@@ -84,8 +90,11 @@ const Teachers = () => {
         <>
             <Header accountName={"example"} subscriptionDaysLeft={"14"} />
             <div>
-                <h2>Odpowiedzi</h2>
-                <input
+                <h1 className='title'>Odpowiedzi</h1>
+                {subject && <p className='subtitle'>Przedmiot: {subject}</p>}
+                {teacher && <p className='subtitle'>Nauczyciel: {teacher}</p>}
+                <Button id='ButtonAddAnswer' variant='outlined' onClick={()=>handleAddAnswerClick(String(subject), String(teacher))}>Dodaj odpowiedź</Button>
+                <input className='SearchInput'
                     type="text"
                     placeholder="Szukaj odpowiedzi..."
                     value={searchTerm}
@@ -94,12 +103,12 @@ const Teachers = () => {
                 <Checkbox value={"kartkówka"}></Checkbox>
                 <Checkbox value={"sprawdzian"}></Checkbox>
                 <Checkbox value={"inne"}></Checkbox>
-                <Button variant='outlined'>Dodaj odpowiedź</Button>
-                {subject && <p>Przedmiot: {subject}</p>}
-                {teacher && <p>Nauczyciel: {teacher}</p>}
+                
+                
+                
                 {subject === "Matematyka" && teacher === "Ewa Znamirowska" && filteredAnswers.map((answer, index) => (
-                    <div>
-                    <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating} key={answer.id}></Answer>
+                    <div className='BlockAnswersContainer' key={answer.id}>
+                    <Answer id={answer.id} name={answer.name} author={answer.author} rating={answer.rating} key={answer.id} onAnswerClick={handleAnswerClick}></Answer>
                     <br />
                     </div>
                 ))}
