@@ -19,4 +19,6 @@ public class SubjectDTO {
     public void setName(String name) {
         this.nameSubject = name;
     }
+
+
 }
