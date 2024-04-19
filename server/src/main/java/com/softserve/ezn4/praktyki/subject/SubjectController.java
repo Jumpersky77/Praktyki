@@ -19,6 +19,6 @@ public class SubjectController {
     @GetMapping(value = {"/subjects"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @CrossOrigin(origins = "http://localhost:3000")
     public List<SubjectDTO> getAllSubjects() {
-        return subjectRepository.findAll();
+        return subjectRepository.getAllSubjects();
     }
 }
