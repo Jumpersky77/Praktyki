@@ -14,33 +14,11 @@ public class SubjectDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Optional<SubjectDTO> getSubject(Long id) {
-        var sql = """
-                SELECT id, namesubject
-                FROM subject
-                WHERE id = ?
-                 """;
-        return jdbcTemplate.query(sql, new SubjectMapper(), id)
-                .stream()
-                .findFirst();
-    }
-
     public List<SubjectDTO> getAllSubjects() {
         var sql = """
                 SELECT id, namesubject
                 FROM subject
                  """;
         return jdbcTemplate.query(sql, new SubjectMapper());
-    }
-
-    public int insertSubject(SubjectDTO subject) {
-        var sql = """
-                INSERT INTO subject(namesubject)
-                VALUES (?, ?);
-                 """;
-        return jdbcTemplate.update(
-                sql,
-                subject.getName()
-        );
     }
 }

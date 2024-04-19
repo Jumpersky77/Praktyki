@@ -22,9 +22,4 @@ public class SubjectController {
     public List<SubjectDTO> getAllSubjects() {
         return subjectRepository.getAllSubjects();
     }
-
-    @GetMapping(value = {"/{id}"}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public Optional<SubjectDTO> getSubject(@PathVariable Long id) {
-        return subjectRepository.getSubject(id);
-    }
 }

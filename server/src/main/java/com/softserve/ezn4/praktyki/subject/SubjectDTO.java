@@ -1,6 +1,9 @@
 package com.softserve.ezn4.praktyki.subject;
 
 public class SubjectDTO {
+    public static final String ID = "id";
+    public static final String NAME = "namesubject";
+
     private Long id;
     private String nameSubject;
 

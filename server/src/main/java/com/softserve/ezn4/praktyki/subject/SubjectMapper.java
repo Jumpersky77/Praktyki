@@ -9,8 +9,8 @@ public class SubjectMapper implements RowMapper<SubjectDTO> {
     @Override
     public SubjectDTO mapRow(ResultSet resultSet, int i) throws SQLException {
         var subject =  new SubjectDTO();
-        subject.setId(resultSet.getLong("id"));
-        subject.setName(resultSet.getString("namesubject"));
+        subject.setId(resultSet.getLong(SubjectDTO.ID));
+        subject.setName(resultSet.getString(SubjectDTO.NAME));
         return subject;
     }
 }
