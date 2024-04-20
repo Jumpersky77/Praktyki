@@ -1,6 +1,5 @@
 package com.softserve.ezn4.praktyki.teachers;
 
-import com.softserve.ezn4.praktyki.subject.SubjectMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +7,7 @@ import java.util.List;
 
 @Repository
 public class TeacherDAO {
+
     private final JdbcTemplate jdbcTemplate;
 
     public TeacherDAO(JdbcTemplate jdbcTemplate) {
@@ -16,19 +16,11 @@ public class TeacherDAO {
 
     public List<TeacherDTO> findAllBySubjectID(Long subjectID) {
         var sql = """
-                SELECT id, namesubject
-                FROM SUBJECT
+                SELECT teachers.id, teachers.first_name, teachers.last_name
+                FROM teachers_subject
+                INNER JOIN teachers ON teachers_subject.id_teachers = teachers.id
+                WHERE teachers_subject.id_subject = ?
                  """;
-        return List.of();
+        return jdbcTemplate.query(sql, new TeacherMapper(), subjectID);
     }
-
-        public List<TeacherDTO> findAll() {
-        var sql = """
-                SELECT id, namesubject
-                FROM SUBJECT
-                 """;
-        return jdbcTemplate.query(sql, new TeacherMapper());
-    }
-
-
 }
