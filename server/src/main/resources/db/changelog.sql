@@ -119,3 +119,12 @@ CREATE TABLE teachers_subject (
 	id_subject int4 NOT NULL,
 	CONSTRAINT teachers_subject_pk PRIMARY KEY (id_teachers, id_subject)
 );
+
+ALTER TABLE teachers_subject ADD CONSTRAINT teachers_subject_subject_fk FOREIGN KEY (id_subject) REFERENCES subject(id) ON DELETE CASCADE;
+ALTER TABLE teachers_subject ADD CONSTRAINT teachers_subject_teachers_fk FOREIGN KEY (id_teachers) REFERENCES teachers(id);
+ALTER TABLE answers ADD CONSTRAINT answers_teachers_fk FOREIGN KEY (id) REFERENCES teachers(id);
+ALTER TABLE "comments" ADD CONSTRAINT comments_answers_fk FOREIGN KEY (id_answer) REFERENCES answers(id) ON DELETE CASCADE;
+ALTER TABLE "comments" ADD CONSTRAINT comments_student_fk FOREIGN KEY (id_student) REFERENCES student(id);
+ALTER TABLE grades ADD CONSTRAINT grades_answers_fk FOREIGN KEY (id_answer) REFERENCES answers(id) ON DELETE CASCADE;
+ALTER TABLE grades ADD CONSTRAINT grades_student_fk FOREIGN KEY (id_student) REFERENCES student(id);
+ALTER TABLE image ADD CONSTRAINT image_answers_fk FOREIGN KEY (id_answer) REFERENCES answers(id) ON DELETE CASCADE;
