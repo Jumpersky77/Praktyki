@@ -7,11 +7,12 @@ import {
 import AppShell from "../components/AppShell";
 import Subjects from "../pages/Subjects";
 import Teachers from "../pages/Teachers";
-import { Details, Login } from "@mui/icons-material";
+import { Login } from "@mui/icons-material";
 import AddAnswer from "../pages/AddAnswer";
 import Answers from "../pages/Answers";
 import Register from "../pages/Register";
 import { createContext, useContext } from "react";
+import Details from "../pages/Details";
 
 const PAGES_URL = "/pages";
 

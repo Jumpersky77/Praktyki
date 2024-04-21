@@ -113,7 +113,7 @@ const Teachers = () => {
                 author={answer.author}
                 rating={answer.rating}
                 key={answer.id}
-                onAnswerClick={navigate.toAddAnswerPage}
+                onAnswerClick={(answerID) => navigate.toAddAnswerPage(answerID)}
               ></Answer>
               <br />
             </div>
