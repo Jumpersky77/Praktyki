@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class SubjectController {
 
     private final SubjectDAO subjectRepository;
@@ -16,7 +17,6 @@ public class SubjectController {
     }
 
     @GetMapping(value = {"/subjects"}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<SubjectDTO> getAllSubjects() {
         return subjectRepository.getAllSubjects();
     }
