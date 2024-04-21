@@ -1,18 +1,19 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   useNavigate,
 } from "react-router-dom";
 import AppShell from "../components/AppShell";
 import Subjects from "../pages/Subjects";
 import Teachers from "../pages/Teachers";
-import { Login } from "@mui/icons-material";
 import AddAnswer from "../pages/AddAnswer";
 import Answers from "../pages/Answers";
 import Register from "../pages/Register";
 import { createContext, useContext } from "react";
 import Details from "../pages/Details";
+import Login from "../pages/Login";
 
 const PAGES_URL = "/pages";
 
@@ -63,8 +64,11 @@ export const createNavigationContext: () => NavigationContext = () => {
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/" element={<Navigate to={"/pages/subjects"} />} />
+      <Route path="/auth">
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+      </Route>
       <Route path="/pages" element={<AppShell />}>
         <Route path="subjects" element={<Subjects />} />
         <Route path="teachers" element={<Teachers />} />
