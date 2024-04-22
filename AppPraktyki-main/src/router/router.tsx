@@ -20,10 +20,10 @@ const PAGES_URL = "/pages";
 
 export interface NavigationContext {
   toTeacherPage(subject: Subject): void;
-  toAnswersPage(subject: string, teacher: string): void;
+  toAnswersPage(subject: Subject, teacher: string): void;
   toAddAnswerPage(answerID: string): void;
   toDetailsPage(subject: string, teacher: string): void;
-  getAnswerPageLink(subject: string, teacher: string): string;
+  getAnswerPageLink(subject: Subject, teacher: string): string;
 }
 
 const throwError = () => {
