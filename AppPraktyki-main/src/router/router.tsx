@@ -14,11 +14,12 @@ import Register from "../pages/Register";
 import { createContext, useContext } from "react";
 import Details from "../pages/Details";
 import Login from "../pages/Login";
+import { Subject } from "../model/subject";
 
 const PAGES_URL = "/pages";
 
 export interface NavigationContext {
-  toTeacherPage(subject: string): void;
+  toTeacherPage(subject: Subject): void;
   toAnswersPage(subject: string, teacher: string): void;
   toAddAnswerPage(answerID: string): void;
   toDetailsPage(subject: string, teacher: string): void;
@@ -44,10 +45,10 @@ export const createNavigationContext: () => NavigationContext = () => {
 
   return {
     toTeacherPage(subject) {
-      navigate(`${PAGES_URL}/teachers?subject=${subject}`);
+      navigate(`${PAGES_URL}/teachers?subject=${subject.name}`,{state:subject});
     },
-    toAnswersPage(subject: string, teacher: string) {
-      navigate(this.getAnswerPageLink(subject, teacher));
+    toAnswersPage(subject, teacher: string) {
+      navigate(this.getAnswerPageLink(subject, teacher),{state:subject});
     },
     toAddAnswerPage(answerID: string) {
       navigate(`${PAGES_URL}/details?answerid=${answerID}`);
