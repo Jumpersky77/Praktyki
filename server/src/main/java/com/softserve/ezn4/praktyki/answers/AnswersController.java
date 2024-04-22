@@ -1,6 +1,6 @@
 package com.softserve.ezn4.praktyki.answers;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,30 +18,33 @@ public class AnswersController {
     }
 
     @PostMapping("/teacher/{teacherID}")
-    List<AnswerDTO> getAnswersByTeacherIDWithGrades(@PathVariable("teacherID") Long teacherID, @RequestBody AnswerFilter filter) {
+    List<AnswerDTO> getAnswersByTeacherIDWithGrades(
+            @PathVariable("teacherID") Long teacherID,
+            @RequestBody AnswerFilter filter) {
         // TODO: Implement service and controller
         return readAnswerService.findAnswersByTeacherWithCalculatedGrade(teacherID, filter);
     }
 
     @GetMapping("/{answerID}/comments")
-    List<CommentDTO> getAnswerCommentsByID(@PathVariable("answerID") Long answerID) {
+    public List<CommentDTO> getAnswerCommentsByID(@PathVariable("answerID") Long answerID) {
         // TODO: Implement service and controller
         return readAnswerService.findAnswerCommentsByID(answerID);
     }
 
     @PostMapping("/{answerID}/comments")
-    ResponseEntity<String> addCommentByAnswerID(
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addCommentByAnswerID(
             @PathVariable("answerID") Long answerID,
             @RequestBody CommentInboundDTO commentInbound) {
         // TODO: Implement add comment
         addAnswerService.addComment(answerID, commentInbound);
-        return ResponseEntity.ok("Comment added successfully");
+
     }
 
-    @PostMapping("/addAnswer")
-    ResponseEntity<String> addAnswer(@RequestBody AnswerInboundDTO answerInbound) {
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addAnswer(@RequestBody AnswerInboundDTO answerInbound) {
         // TODO: implement add answer
         addAnswerService.addAnswer(answerInbound);
-        return ResponseEntity.ok("Answer added successfully");
     }
 }
