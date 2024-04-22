@@ -19,7 +19,7 @@ function Header(props: Props) {
 
         <div id="header" style={{ position: 'relative' }}>
             <Toolbar>
-                <IconButton href='/subjects'>
+                <IconButton href='/pages/subjects'>
                     <HomeIcon fontSize='large' sx={{ color: "#1976d2" }}/>
                 </IconButton>
                 <div style={{ flexGrow: 1 }} />

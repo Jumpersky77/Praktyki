@@ -1,35 +1,42 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import Header from '../components/Header';
-import "../style/styleR.css"
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import Button from "@mui/material/Button";
+import "../style/styleR.css";
+import { useAppNavigation } from "../router/router";
 
-const teachers = ["Ewa Znamirowska", "Dorota Gut"];
+const _teachers = ["Ewa Znamirowska", "Dorota Gut"];
 
 const Teachers = () => {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const subject = searchParams.get('subject');
-    const navigate = useNavigate();
-    const handleTeacherClick = (teacher: string) => {
-        navigate(`/answers?subject=${subject}&teacher=${teacher}`);
-    };
+  const [teachers] = useState(_teachers);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const subject = searchParams.get("subject");
+  const navigate = useAppNavigation();
+  const handleTeacherClick = (teacher: string) => {
+    // TODO: how to handel null subject
+    subject && navigate.toAnswersPage(subject, teacher);
+  };
 
-    return (
-        <>
-            <Header accountName={"example"} subscriptionDaysLeft={"14"} />
-            <div>
-            <h1 className='title'>Lista nauczycieli</h1>
-                {subject && <p className='subtitle'>Przedmiot: {subject}</p>}
-                {subject === "Matematyka" && teachers.map((teacher, index) => (
-                    <div className='BlockContainer'>
-                        <Button className="Block" variant="outlined" key={index} onClick={() => handleTeacherClick(teacher)}>{teacher}</Button>
-                    </div>
-                ))}
+  return (
+    <>
+      <div>
+        <h1 className="title">Lista nauczycieli</h1>
+        {subject && <p className="subtitle">Przedmiot: {subject}</p>}
+        {subject === "Matematyka" &&
+          teachers.map((teacher, index) => (
+            <div className="BlockContainer" key={index}>
+              <Button
+                className="Block"
+                variant="outlined"
+                onClick={() => handleTeacherClick(teacher)}
+              >
+                {teacher}
+              </Button>
             </div>
-        </>
-    );
-}
+          ))}
+      </div>
+    </>
+  );
+};
 
 export default Teachers;
