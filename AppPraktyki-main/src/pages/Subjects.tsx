@@ -16,7 +16,7 @@ const fetchSubjects = async () => {
 const Subjects = () => {
   const navigate = useAppNavigation();
 
-  const handleSubjectClick = (subject: string) => {
+  const handleSubjectClick = (subject: Subject) => {
     navigate.toTeacherPage(subject);
   };
 
@@ -35,7 +35,7 @@ const Subjects = () => {
                     variant="outlined"
                     color="primary"
                     size="large"
-                    onClick={() => handleSubjectClick(subject.name)}
+                    onClick={() => handleSubjectClick(subject)}
                   >
                     {subject.name}
                   </Button>
