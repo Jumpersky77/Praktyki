@@ -87,7 +87,7 @@ const Answers = () => {
         {subject && <p className="subtitle">Przedmiot: {subject.name}</p>}
         {teacher && (
           <p className="subtitle">
-            Nauczyciel: {teacher.firstName + "" + teacher.lastName}
+            Nauczyciel: {teacher.firstName + " " + teacher.lastName}
           </p>
         )}
         <Button
