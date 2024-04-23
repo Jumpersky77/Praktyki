@@ -25,8 +25,27 @@ import FormLabel from "@mui/material/FormLabel";
 import { useAppNavigation } from "../router/router";
 import { SubjectTeacher } from "../model/subject-teacher";
 const AddAnswer = () => {
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+
+  
+  
+  
+  
+  
+  
+  const [Answer, setAnswer]=useState({
+    studentID: null,
+    teacherID: null,
+    subjectID: null,
+    type:"",
+    answerQuestion: "", //title
+    answerResponse: "", 
+    Data: new Date, 
+  });
+
+  const handleChange = (e:any) => {
+    const value = e.target.value;
+    setAnswer({ ...Answer, [e.target.name]: value })
+}
 
   const location = useLocation();
   const { teacher, subject } = location.state as SubjectTeacher;
@@ -58,13 +77,13 @@ const AddAnswer = () => {
     }
   };
 
-  const [type, setType] = useState("");
+  // const [type, setType] = useState("");
 
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setType((event.target as HTMLInputElement).value);
-  };
+  // const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setType((event.target as HTMLInputElement).value);
+  // };
 
-  //console.log(title, type, previewImages)
+  console.log(Answer)
 
   const handleAddAnswer = async () => {};
 
@@ -95,8 +114,8 @@ const AddAnswer = () => {
                     id="title"
                     label="Tytuł"
                     autoFocus
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={Answer.answerQuestion}
+                    onChange={(e) => handleChange(e)}
                   />
                 </Grid>
 
@@ -106,7 +125,8 @@ const AddAnswer = () => {
                     label="Tu możesz wpisać odpowiedzi"
                     multiline
                     fullWidth
-                    onChange={(e) => setText(e.target.value)}
+                    value={Answer.answerResponse}
+                    onChange={(e) => handleChange(e)}
                   />
                 </Grid>
 
@@ -148,8 +168,8 @@ const AddAnswer = () => {
                     <RadioGroup
                       row
                       aria-labelledby="demo-row-radio-buttons-group-label"
-                      name="row-radio-buttons-group"
-                      onChange={handleRadioChange}
+                      name="type"
+                      onChange={(e)=>handleChange(e)}
                     >
                       <FormControlLabel
                         value="sprawdzian"
