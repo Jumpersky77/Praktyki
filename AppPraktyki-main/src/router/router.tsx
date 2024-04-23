@@ -15,15 +15,16 @@ import { createContext, useContext } from "react";
 import Details from "../pages/Details";
 import Login from "../pages/Login";
 import { Subject } from "../model/subject";
+import { Teacher } from "../model/teacher";
 
 const PAGES_URL = "/pages";
 
 export interface NavigationContext {
   toTeacherPage(subject: Subject): void;
-  toAnswersPage(subject: Subject, teacher: string): void;
-  toAddAnswerPage(answerID: string): void;
-  toDetailsPage(subject: string, teacher: string): void;
-  getAnswerPageLink(subject: Subject, teacher: string): string;
+  toAnswersPage(subject: Subject, teacher: Teacher): void;
+  toAddAnswerPage(subject: Subject, teacher: Teacher): void;
+  toDetailsPage(answerID: string): void;
+  getAnswerPageLink(subject: Subject, teacher: Teacher): string;
 }
 
 const throwError = () => {
@@ -45,19 +46,32 @@ export const createNavigationContext: () => NavigationContext = () => {
 
   return {
     toTeacherPage(subject) {
-      navigate(`${PAGES_URL}/teachers?subject=${subject.name}`,{state:subject});
+      navigate(`${PAGES_URL}/teachers?subject=${subject.name}`, {
+        state: subject,
+      });
     },
-    toAnswersPage(subject, teacher: string) {
-      navigate(this.getAnswerPageLink(subject, teacher),{state:subject});
+    toAnswersPage(subject, teacher) {
+      navigate(this.getAnswerPageLink(subject, teacher), {
+        state: { subject, teacher },
+      });
     },
-    toAddAnswerPage(answerID: string) {
+    toAddAnswerPage(subject, teacher) {
+      navigate(
+        `${PAGES_URL}/addanswer?subject=${subject.name}&teacher=${
+          teacher.firstName + "" + teacher.lastName
+        }`,
+        {
+          state: { subject, teacher },
+        }
+      );
+    },
+    toDetailsPage(answerID) {
       navigate(`${PAGES_URL}/details?answerid=${answerID}`);
     },
-    toDetailsPage(subject: string, teacher: string) {
-      navigate(`${PAGES_URL}/addanswer?subject=${subject}&teacher=${teacher}`);
-    },
     getAnswerPageLink(subject, teacher) {
-      return `${PAGES_URL}/answers?subject=${subject}&teacher=${teacher}`;
+      return `${PAGES_URL}/answers?subject=${subject.name}&teacher=${
+        teacher.firstName + "" + teacher.lastName
+      }`;
     },
   };
 };

@@ -23,14 +23,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useAppNavigation } from "../router/router";
+import { SubjectTeacher } from "../model/subject-teacher";
 const AddAnswer = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const subject = searchParams.get("subject");
-  const teacher = searchParams.get("teacher");
+  const { teacher, subject } = location.state as SubjectTeacher;
 
   const navigation = useAppNavigation();
 
@@ -82,8 +81,10 @@ const AddAnswer = () => {
               alignItems: "center",
             }}
           >
-            <Typography variant="h5">Przedmiot: {subject}</Typography>
-            <Typography variant="h5">Nauczyciel: {teacher}</Typography>
+            <Typography variant="h5">Przedmiot: {subject.name}</Typography>
+            <Typography variant="h5">
+              Nauczyciel: {teacher.firstName + "" + teacher.lastName}
+            </Typography>
             <Box sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -180,10 +181,8 @@ const AddAnswer = () => {
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link
-                    to={navigation.getAnswerPageLink(
-                      String(subject),
-                      String(teacher)
-                    )}
+                    to={navigation.getAnswerPageLink(subject, teacher)}
+                    state={location.state}
                   >
                     Wróć do listy odpowiedzi
                   </Link>
