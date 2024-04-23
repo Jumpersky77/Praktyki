@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import Answer from "../components/Answer";
 import "../style/styleR.css";
 import { useAppNavigation } from "../router/router";
+import { Teacher } from "../model/teacher";
+import { Subject } from "../model/subject";
 
 const _answers = [
   {
@@ -31,11 +33,12 @@ const _answers = [
 
 type Props = { value: string };
 
-const Teachers = () => {
+const Answers = () => {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const subject = searchParams.get("subject");
-  const teacher = searchParams.get("teacher");
+  const { teacher, subject } = location.state as {
+    teacher: Teacher;
+    subject: Subject;
+  };
   const navigate = useAppNavigation();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTypes, setSearchTypes] = useState<string[]>([]);
@@ -81,14 +84,16 @@ const Teachers = () => {
     <>
       <div>
         <h1 className="title">Odpowiedzi</h1>
-        {subject && <p className="subtitle">Przedmiot: {subject}</p>}
-        {teacher && <p className="subtitle">Nauczyciel: {teacher}</p>}
+        {subject && <p className="subtitle">Przedmiot: {subject.name}</p>}
+        {teacher && (
+          <p className="subtitle">
+            Nauczyciel: {teacher.firstName + "" + teacher.lastName}
+          </p>
+        )}
         <Button
           id="ButtonAddAnswer"
           variant="outlined"
-          onClick={() =>
-            navigate.toDetailsPage(String(subject), String(teacher))
-          }
+          onClick={() => navigate.toAddAnswerPage(subject, teacher)}
         >
           Dodaj odpowiedź
         </Button>
@@ -103,24 +108,22 @@ const Teachers = () => {
         <Checkbox value={"sprawdzian"}></Checkbox>
         <Checkbox value={"inne"}></Checkbox>
 
-        {subject === "Matematyka" &&
-          teacher === "Ewa Znamirowska" &&
-          filteredAnswers.map((answer, index) => (
-            <div className="BlockAnswersContainer" key={answer.id}>
-              <Answer
-                id={answer.id}
-                name={answer.name}
-                author={answer.author}
-                rating={answer.rating}
-                key={answer.id}
-                onAnswerClick={(answerID) => navigate.toAddAnswerPage(answerID)}
-              ></Answer>
-              <br />
-            </div>
-          ))}
+        {filteredAnswers.map((answer, index) => (
+          <div className="BlockAnswersContainer" key={answer.id}>
+            <Answer
+              id={answer.id}
+              name={answer.name}
+              author={answer.author}
+              rating={answer.rating}
+              key={answer.id}
+              onAnswerClick={(answerID) => navigate.toDetailsPage(answerID)}
+            ></Answer>
+            <br />
+          </div>
+        ))}
       </div>
     </>
   );
 };
 
-export default Teachers;
+export default Answers;
