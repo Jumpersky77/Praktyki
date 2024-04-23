@@ -17,11 +17,10 @@ public class AnswersController {
         this.readAnswerService = readAnswerService;
     }
 
-    @PostMapping("/teacher/{teacherID}")
+    @GetMapping("/teacher/{teacherID}")
     List<AnswerDTO> getAnswersByTeacherIDWithGrades(
             @PathVariable("teacherID") Long teacherID,
             @RequestBody AnswerFilter filter) {
-        // TODO: Implement service and controller
         return readAnswerService.findAnswersByTeacherWithCalculatedGrade(teacherID, filter);
     }
 

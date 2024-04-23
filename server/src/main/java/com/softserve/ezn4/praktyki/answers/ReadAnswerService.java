@@ -6,11 +6,13 @@ import java.util.List;
 
 @Service
 public class ReadAnswerService {
+    private final AnswerDAO answerDAO;
+
+    public ReadAnswerService(AnswerDAO answerDAO) {
+        this.answerDAO = answerDAO;
+    }
     List<AnswerDTO> findAnswersByTeacherWithCalculatedGrade(Long teacherID, AnswerFilter filter) {
-        return List.of(
-                new AnswerDTO(1L, AnswerType.KARTKÓWKA, "Milosz", 7.6),
-                new AnswerDTO(1L, AnswerType.SPRAWDZIAN, "Bartosz", 5.6),
-                new AnswerDTO(1L, AnswerType.INNE, "Mikolaj", 8.4));
+        return answerDAO.findAnswersByTeacher(teacherID);
     }
 
     List<CommentDTO> findAnswerCommentsByID(Long answerID) {
