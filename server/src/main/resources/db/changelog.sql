@@ -17,6 +17,7 @@ CREATE TABLE answers (
 	grade float4 NULL,
 	id_teachers int4 NULL,
 	id_subject int4 NULL,
+	answer_type varchar(20) NULL,
 	id SERIAL NOT NULL,
 	CONSTRAINT answers_pkey PRIMARY KEY (id)
 );
