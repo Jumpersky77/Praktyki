@@ -1,7 +1,7 @@
 package com.softserve.ezn4.praktyki.answers;
 
 public enum AnswerType {
-    KARTKOWKA,
+    KARTKÓWKA,
     SPRAWDZIAN,
     INNE
 }
