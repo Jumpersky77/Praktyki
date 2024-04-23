@@ -24,45 +24,49 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useAppNavigation } from "../router/router";
 import { SubjectTeacher } from "../model/subject-teacher";
+import AnswerServ from "../service/AnswerServ";
 const AddAnswer = () => {
 
-  
-  
-  
+  const location = useLocation();
+  const { teacher, subject } = location.state as SubjectTeacher;
+
+  const navigation = useAppNavigation();
   
   
   
   const [Answer, setAnswer]=useState({
-    studentID: null,
-    teacherID: null,
-    subjectID: null,
-    type:"",
+    studentID: 1,
+    teacherID: teacher.id,
+    subjectID: subject.id,
     answerQuestion: "", //title
-    answerResponse: "", 
-    Data: new Date, 
+    answerResponse: "",
+    type:"",
   });
 
   const handleChange = (e:any) => {
     const value = e.target.value;
     setAnswer({ ...Answer, [e.target.name]: value })
 }
-
-  const location = useLocation();
-  const { teacher, subject } = location.state as SubjectTeacher;
-
-  const navigation = useAppNavigation();
-
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
+  const handleAddAnswer = (e:any) => {
+    e.preventDefault();
+    console.log(Answer);
+    AnswerServ.saveAnswer(Answer)
+        .then((res) => {
+            console.log("User Added Successfully");
+            setAnswer({
+              studentID: 1,
+              teacherID: teacher.id,
+              subjectID: subject.id,
+              answerQuestion: "",
+              answerResponse: "",
+              type:"",
+            })
+        }).catch((error) => {
+            console.log(error);
+        });
+  }
+  
+  
 
   const [previewImages, setPreviewImages] = useState<string[]>([]);
 
@@ -77,6 +81,17 @@ const AddAnswer = () => {
     }
   };
 
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
   // const [type, setType] = useState("");
 
   // const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +100,6 @@ const AddAnswer = () => {
 
   console.log(Answer)
 
-  const handleAddAnswer = async () => {};
 
   return (
     <>
@@ -108,24 +122,26 @@ const AddAnswer = () => {
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
-                    name="title"
+                    name="answerQuestion"
                     required
                     fullWidth
                     id="title"
                     label="Tytuł"
                     autoFocus
-                    value={Answer.answerQuestion}
                     onChange={(e) => handleChange(e)}
+                    //value={Answer.answerQuestion}
+                    
                   />
                 </Grid>
 
                 <Grid item xs={12}>
                   <TextField
+                    name="answerResponse"
                     id="outlined-multiline-flexible"
                     label="Tu możesz wpisać odpowiedzi"
                     multiline
                     fullWidth
-                    value={Answer.answerResponse}
+                    //value={Answer.answerResponse}
                     onChange={(e) => handleChange(e)}
                   />
                 </Grid>
@@ -172,17 +188,17 @@ const AddAnswer = () => {
                       onChange={(e)=>handleChange(e)}
                     >
                       <FormControlLabel
-                        value="sprawdzian"
+                        value="SPRAWDZIAN"
                         control={<Radio />}
                         label="Sprawdzian"
                       />
                       <FormControlLabel
-                        value="kartkówka"
+                        value="KARTKÓWKA"
                         control={<Radio />}
                         label="Kartkówka"
                       />
                       <FormControlLabel
-                        value="inne"
+                        value="INNE"
                         control={<Radio />}
                         label="Inne"
                       />
