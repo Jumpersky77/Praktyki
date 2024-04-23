@@ -19,9 +19,9 @@ const Teachers = () => {
   const subject : Subject = location.state;
   const searchParams = new URLSearchParams(location.search);
   const navigate = useAppNavigation();
-  const handleTeacherClick = (teacher: string) => {
+  const handleTeacherClick = (teacher: Teacher) => {
     // TODO: how to handel null subject
-    subject && navigate.toAnswersPage(subject.name, teacher);
+    subject && navigate.toAnswersPage(subject, teacher);
   };
 
   return (
@@ -57,7 +57,7 @@ const Teachers = () => {
                     variant="outlined"
                     color="primary"
                     size="large"
-                    onClick={() => handleTeacherClick(teacher.firstName + " " + teacher.lastName)}
+                    onClick={() => handleTeacherClick(teacher)}
                   >
                     {teacher.firstName + " " + teacher.lastName}
                   </Button>
