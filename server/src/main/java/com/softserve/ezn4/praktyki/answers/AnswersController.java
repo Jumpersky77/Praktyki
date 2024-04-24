@@ -43,7 +43,6 @@ public class AnswersController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void addAnswer(@RequestBody AnswerInboundDTO answerInbound) {
-        // TODO: implement add answer
         addAnswerService.addAnswer(answerInbound);
     }
 }
