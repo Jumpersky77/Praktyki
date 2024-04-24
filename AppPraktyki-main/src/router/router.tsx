@@ -88,7 +88,7 @@ export const router = createBrowserRouter(
         <Route path="subjects" element={<Subjects />} />
         <Route path="teachers" element={<Teachers />} />
         <Route path="answers" element={<Answers />} />
-        <Route path="details" element={<Details />} />
+        <Route path="answers/:answerID" element={<Details />} />
         <Route path="addanswer" element={<AddAnswer />} />
       </Route>
     </>
