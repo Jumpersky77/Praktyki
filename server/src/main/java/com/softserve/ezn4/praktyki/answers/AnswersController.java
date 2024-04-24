@@ -17,7 +17,7 @@ public class AnswersController {
         this.readAnswerService = readAnswerService;
     }
 
-    @GetMapping("/teacher/{teacherID}")
+    @PostMapping("/teacher/{teacherID}")
     List<AnswerDTO> getAnswersByTeacherIDWithGrades(
             @PathVariable("teacherID") Long teacherID,
             @RequestBody AnswerFilter filter) {
