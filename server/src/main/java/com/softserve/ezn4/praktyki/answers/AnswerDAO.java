@@ -53,4 +53,13 @@ public class AnswerDAO {
              """;
         return jdbcTemplate.query(sql,new CommentMapper(), answerID);
     }
+
+    public int insertComment(Long studentID, Long answerID, String comment) {
+        var sql = """
+                INSERT INTO comments
+                (id_student, id_answer, comment_text)
+                VALUES (?,?,?)
+                 """;
+        return jdbcTemplate.update(sql, studentID, answerID, comment);
+    }
 }

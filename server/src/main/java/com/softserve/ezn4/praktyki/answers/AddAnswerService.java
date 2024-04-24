@@ -25,7 +25,11 @@ public class AddAnswerService {
         );
     }
 
-    public int addComment(Long answerID, CommentInboundDTO commentInbound) {
-        return 1;
+    public void addComment(CommentInboundDTO commentInbound) {
+        answerDAO.insertComment(
+                commentInbound.studentID(),
+                commentInbound.answerID(),
+                commentInbound.comment()
+        );
     }
 }

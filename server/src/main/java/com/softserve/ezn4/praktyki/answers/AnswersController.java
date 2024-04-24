@@ -32,17 +32,16 @@ public class AnswersController {
 
     @GetMapping("/{answerID}/comments")
     public List<CommentDTO> getAnswerCommentsByID(@PathVariable("answerID") Long answerID) {
-        // TODO: Implement service and controller
         return readAnswerService.findAnswerCommentsByID(answerID);
     }
 
     @PostMapping("/{answerID}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public void addCommentByAnswerID(
-            @PathVariable("answerID") Long answerID,
+
             @RequestBody CommentInboundDTO commentInbound) {
         // TODO: Implement add comment
-        addAnswerService.addComment(answerID, commentInbound);
+        addAnswerService.addComment(commentInbound);
     }
 
     @PostMapping
