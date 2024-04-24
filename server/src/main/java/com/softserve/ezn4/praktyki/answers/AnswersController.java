@@ -1,6 +1,7 @@
 package com.softserve.ezn4.praktyki.answers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,9 +45,10 @@ public class AnswersController {
         addAnswerService.addComment(commentInbound);
     }
 
-    @PostMapping
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void addAnswer(@RequestBody AnswerInboundDTO answerInbound) {
+    public void addAnswer(@ModelAttribute AnswerInboundDTO answerInbound) {
         addAnswerService.addAnswer(answerInbound);
     }
 }

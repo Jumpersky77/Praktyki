@@ -1,9 +1,6 @@
-import Header from "../components/Header";
 import React from "react";
-import { UserName } from "../App";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
-  Avatar,
   Box,
   Button,
   Container,
@@ -14,7 +11,6 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Radio from "@mui/material/Radio";
@@ -25,52 +21,56 @@ import FormLabel from "@mui/material/FormLabel";
 import { useAppNavigation } from "../router/router";
 import { SubjectTeacher } from "../model/subject-teacher";
 import AnswerServ from "../service/AnswerServ";
-import { Url } from "url";
-import { blob } from "stream/consumers";
-const AddAnswer = () => {
 
+const AddAnswer = () => {
   const location = useLocation();
   const { teacher, subject } = location.state as SubjectTeacher;
 
   const navigation = useAppNavigation();
-  
-  const [Answer, setAnswer]=useState({
+
+  const [Answer, setAnswer] = useState({
     studentID: 1,
     teacherID: teacher.id,
     subjectID: subject.id,
     answerQuestion: "",
     answerResponse: "",
-    type:"",
+    type: "",
   });
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     const value = e.target.value;
-    setAnswer({ ...Answer, [e.target.name]: value })
+    setAnswer({ ...Answer, [e.target.name]: value });
   };
-  const handleAddAnswer = async (e:any) => {
+  const handleAddAnswer = async (e: any) => {
     e.preventDefault();
-    const [blob] = previewImages.map((img)=>fetch(img).then((res)=>res.blob()));
+    const blobs = previewImages.map((img) =>
+      fetch(img).then((res) => res.blob())
+    );
     const data = new FormData();
-    data.append("img", await blob);
-    Object.entries(Answer).forEach((entry)=>{
+    for await (const blob of blobs) {
+      data.append("photos", blob);
+    }
+    data.append("grade", "0.0");
+    Object.entries(Answer).forEach((entry) => {
       data.append(entry[0], entry[1] as string);
     });
     console.log(Object.fromEntries(data.entries()));
     AnswerServ.saveAnswer(data)
-        .then((res) => {
-            setAnswer({
-              studentID: 1,
-              teacherID: teacher.id,
-              subjectID: subject.id,
-              answerQuestion: "",
-              answerResponse: "",
-              type:"",
-            })
-        }).catch((error) => {
-            console.log(error);
+      .then((res) => {
+        setAnswer({
+          studentID: 1,
+          teacherID: teacher.id,
+          subjectID: subject.id,
+          answerQuestion: "",
+          answerResponse: "",
+          type: "",
         });
-  }
-  
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const [previewImages, setPreviewImages] = useState<string[]>([]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +95,6 @@ const AddAnswer = () => {
     whiteSpace: "nowrap",
     width: 1,
   });
-
 
   return (
     <>
@@ -181,7 +180,7 @@ const AddAnswer = () => {
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="type"
                       defaultValue="unchecked"
-                      onChange={(e)=>handleChange(e)}
+                      onChange={(e) => handleChange(e)}
                     >
                       <FormControlLabel
                         value="SPRAWDZIAN"
