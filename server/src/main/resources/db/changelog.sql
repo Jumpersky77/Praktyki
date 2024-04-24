@@ -171,8 +171,8 @@ VALUES(5, 3);
 --VALUES(2, 1, 'Dobra robota!');
 
 INSERT INTO public.answers
-(student_id, add_data, text_p, text_a, grade, id_teachers, id_subject)
-VALUES(1, '2024-04-13', 'luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque', 'turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum in', 64.3, 1, 1);
+(student_id, add_data, text_p, text_a, grade, id_teachers, id_subject, answer_type)
+VALUES(1, '2024-04-13', 'Równanie Kwadratowe', 'turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum in', 64.3, 1, 1, "KARTKÓWKA");
 
 INSERT INTO public.student
 (slogin, spassword, sadmins)
