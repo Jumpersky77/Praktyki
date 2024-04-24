@@ -116,7 +116,7 @@ const AddAnswer = () => {
           >
             <Typography variant="h5">Przedmiot: {subject.name}</Typography>
             <Typography variant="h5">
-              Nauczyciel: {teacher.firstName + "" + teacher.lastName}
+              Nauczyciel: {teacher.firstName + " " + teacher.lastName}
             </Typography>
             <Box sx={{ mt: 3 }}>
               <Grid container spacing={2}>

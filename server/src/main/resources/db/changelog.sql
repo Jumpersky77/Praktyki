@@ -173,6 +173,10 @@ VALUES(5, 3);
 INSERT INTO public.answers
 (student_id, add_data, text_p, text_a, grade, answer_type, id_teachers, id_subject)
 VALUES(1, '2024-04-13', 'Równania Kwadratowe', 'turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum in', 64.3,'KARTKÓWKA', 1, 1);
+INSERT INTO public.answers
+(student_id, add_data, text_p, text_a, grade, answer_type, id_teachers, id_subject)
+VALUES(2, '2024-04-13', 'Ułamki zwykłe i niezwykłe', 'Odpowiedź do zadania z matematyki', 21.3,'SPRAWDZIAN', 1, 1);
+
 
 INSERT INTO public.student
 (slogin, spassword, sadmins)

@@ -1,9 +1,8 @@
-import { AnswerType } from "./answer-type";
 
 export interface AnswerOutbound {
     studentID: number;
     teacherID: number;
-    type: AnswerType;
+    type: string;
     answerQuestion: string;
     answerResponse: string;
 }

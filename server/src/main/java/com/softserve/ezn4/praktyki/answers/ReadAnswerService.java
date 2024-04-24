@@ -15,9 +15,11 @@ public class ReadAnswerService {
         return answerDAO.findAnswersByTeacher(teacherID);
     }
 
+    AnswerFullDTO findAnswerByID(Long answerID) {
+        return answerDAO.findAnswerById(answerID);
+    }
+
     List<CommentDTO> findAnswerCommentsByID(Long answerID) {
-        return List.of(
-                new CommentDTO( "Milosz", 7.6, "Dobra robota!"),
-                new CommentDTO( "Bartosz", 8.9, "Super!"));
+        return answerDAO.findCommentsByAnswerID(answerID);
     }
 }
