@@ -83,7 +83,7 @@ const Answers = () => {
         {subject && <p className="subtitle">Przedmiot: {subject.name}</p>}
         {teacher && (
           <p className="subtitle">
-            Nauczyciel: {teacher.firstName + "" + teacher.lastName}
+            Nauczyciel: {teacher.firstName + " " + teacher.lastName}
           </p>
         )}
         <Button
@@ -115,9 +115,6 @@ const Answers = () => {
           checked={searchTypes.includes("INNE")}
           onChange={() => handleCheckboxChange("INNE")}
         />
-
-        <h1 className="title">Lista Nauczycieli</h1>
-        {subject && <p className="subtitle">Przedmiot: {subject.name}</p>}
         {filteredAnswers.map((answer, index) => (
           <div className="BlockAnswersContainer" key={answer.id}>
             <Answer

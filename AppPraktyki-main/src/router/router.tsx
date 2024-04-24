@@ -66,7 +66,7 @@ export const createNavigationContext: () => NavigationContext = () => {
       );
     },
     toDetailsPage(answerID) {
-      navigate(`${PAGES_URL}/details?answerid=${answerID}`);
+      navigate(`${PAGES_URL}/answers/${answerID}`);
     },
     getAnswerPageLink(subject, teacher) {
       return `${PAGES_URL}/answers?subject=${subject.name}&teacher=${
