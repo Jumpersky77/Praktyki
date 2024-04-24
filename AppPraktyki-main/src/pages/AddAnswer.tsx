@@ -25,6 +25,8 @@ import FormLabel from "@mui/material/FormLabel";
 import { useAppNavigation } from "../router/router";
 import { SubjectTeacher } from "../model/subject-teacher";
 import AnswerServ from "../service/AnswerServ";
+import { Url } from "url";
+import { blob } from "stream/consumers";
 const AddAnswer = () => {
 
   const location = useLocation();
@@ -32,13 +34,11 @@ const AddAnswer = () => {
 
   const navigation = useAppNavigation();
   
-  
-  
   const [Answer, setAnswer]=useState({
     studentID: 1,
     teacherID: teacher.id,
     subjectID: subject.id,
-    answerQuestion: "", //title
+    answerQuestion: "",
     answerResponse: "",
     type:"",
   });
@@ -46,13 +46,18 @@ const AddAnswer = () => {
   const handleChange = (e:any) => {
     const value = e.target.value;
     setAnswer({ ...Answer, [e.target.name]: value })
-}
-  const handleAddAnswer = (e:any) => {
+  };
+  const handleAddAnswer = async (e:any) => {
     e.preventDefault();
-    console.log(Answer);
-    AnswerServ.saveAnswer(Answer)
+    const [blob] = previewImages.map((img)=>fetch(img).then((res)=>res.blob()));
+    const data = new FormData();
+    data.append("img", await blob);
+    Object.entries(Answer).forEach((entry)=>{
+      data.append(entry[0], entry[1] as string);
+    });
+    console.log(Object.fromEntries(data.entries()));
+    AnswerServ.saveAnswer(data)
         .then((res) => {
-            console.log("User Added Successfully");
             setAnswer({
               studentID: 1,
               teacherID: teacher.id,
@@ -66,8 +71,6 @@ const AddAnswer = () => {
         });
   }
   
-  
-
   const [previewImages, setPreviewImages] = useState<string[]>([]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,13 +95,6 @@ const AddAnswer = () => {
     whiteSpace: "nowrap",
     width: 1,
   });
-  // const [type, setType] = useState("");
-
-  // const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setType((event.target as HTMLInputElement).value);
-  // };
-
-  console.log(Answer)
 
 
   return (
@@ -129,8 +125,7 @@ const AddAnswer = () => {
                     label="Tytuł"
                     autoFocus
                     onChange={(e) => handleChange(e)}
-                    //value={Answer.answerQuestion}
-                    
+                    value={Answer.answerQuestion}
                   />
                 </Grid>
 
@@ -141,8 +136,8 @@ const AddAnswer = () => {
                     label="Tu możesz wpisać odpowiedzi"
                     multiline
                     fullWidth
-                    //value={Answer.answerResponse}
                     onChange={(e) => handleChange(e)}
+                    value={Answer.answerResponse}
                   />
                 </Grid>
 
@@ -185,6 +180,7 @@ const AddAnswer = () => {
                       row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="type"
+                      defaultValue="unchecked"
                       onChange={(e)=>handleChange(e)}
                     >
                       <FormControlLabel
