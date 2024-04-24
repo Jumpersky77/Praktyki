@@ -11,7 +11,7 @@ public class ReadAnswerService {
     public ReadAnswerService(AnswerDAO answerDAO) {
         this.answerDAO = answerDAO;
     }
-    List<AnswerDTO> findAnswersByTeacherWithCalculatedGrade(Long teacherID, AnswerFilter filter) {
+    List<AnswerDTO> findAnswersByTeacherWithCalculatedGrade(Long teacherID) {
         return answerDAO.findAnswersByTeacher(teacherID);
     }
 
