@@ -20,8 +20,6 @@ public class ReadAnswerService {
     }
 
     List<CommentDTO> findAnswerCommentsByID(Long answerID) {
-        return List.of(
-                new CommentDTO( "Milosz", 7.6, "Dobra robota!"),
-                new CommentDTO( "Bartosz", 8.9, "Super!"));
+        return answerDAO.findCommentsByAnswerID(answerID);
     }
 }

@@ -43,4 +43,14 @@ public class AnswerDAO {
              """;
         return jdbcTemplate.queryForObject(sql, new Object[]{answerID}, new AnswerFullMapper());
     }
+
+    public List<CommentDTO> findCommentsByAnswerID(Long answerID){
+        var sql = """
+            SELECT c.comment_text, s.slogin
+            FROM comments c
+            INNER JOIN student s ON s.id = c.id_student
+            WHERE c.id_answer = ?
+             """;
+        return jdbcTemplate.query(sql,new CommentMapper(), answerID);
+    }
 }
