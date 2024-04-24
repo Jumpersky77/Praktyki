@@ -19,9 +19,9 @@ public class AnswersController {
 
     @GetMapping("/teacher/{teacherID}")
     List<AnswerDTO> getAnswersByTeacherIDWithGrades(
-            @PathVariable("teacherID") Long teacherID,
-            @RequestBody AnswerFilter filter) {
-        return readAnswerService.findAnswersByTeacherWithCalculatedGrade(teacherID, filter);
+            @PathVariable("teacherID") Long teacherID
+            ) {
+        return readAnswerService.findAnswersByTeacherWithCalculatedGrade(teacherID);
     }
 
     @GetMapping("/{answerID}")
