@@ -15,7 +15,7 @@ public class AnswerDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int insertAnswer(Long studentID, Long teachersID, Long subjectID, String textA, String textP, Float grade, Date date, AnswerType type) {
+    public int insertAnswer(Long studentID, Long teachersID, Long subjectID, String textA, String textP, double grade, Date date, AnswerType type) {
         var sql = """
                 INSERT INTO answers
                 (student_id, id_teachers, id_subject, text_a, text_p, grade, add_data, answer_type)
@@ -32,5 +32,15 @@ public class AnswerDAO {
             WHERE id_teachers = ?
              """;
         return jdbcTemplate.query(sql, new AnswerMapper(), teacherID);
+    }
+
+    public AnswerFullDTO findAnswerById(Long answerID){
+        var sql = """
+             SELECT a.id, s.slogin, a.grade, a.text_p, a.text_a, a.answer_type
+             FROM answers  a
+             INNER JOIN student s ON s.id = a.student_id
+             WHERE a.id = ?
+             """;
+        return jdbcTemplate.queryForObject(sql, new Object[]{answerID}, new AnswerFullMapper());
     }
 }

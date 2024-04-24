@@ -24,6 +24,12 @@ public class AnswersController {
         return readAnswerService.findAnswersByTeacherWithCalculatedGrade(teacherID, filter);
     }
 
+    @GetMapping("/{answerID}")
+    AnswerFullDTO getAnswersByID(
+            @PathVariable("answerID") Long answerID) {
+        return readAnswerService.findAnswerByID(answerID);
+    }
+
     @GetMapping("/{answerID}/comments")
     public List<CommentDTO> getAnswerCommentsByID(@PathVariable("answerID") Long answerID) {
         // TODO: Implement service and controller
@@ -37,7 +43,6 @@ public class AnswersController {
             @RequestBody CommentInboundDTO commentInbound) {
         // TODO: Implement add comment
         addAnswerService.addComment(answerID, commentInbound);
-
     }
 
     @PostMapping
