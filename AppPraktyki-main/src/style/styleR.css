@@ -98,3 +98,43 @@
   width: 35px;
   height: 35px;
 }
+
+.CommentContainer {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 20%;
+  min-width: 150px;
+}
+
+.CommentContainer .user_name {
+  font-weight: bold;
+}
+
+
+#Dodaj_Komentarz{
+float: left;
+margin-bottom: 10px;
+
+}
+
+#AddComment_Button{
+  margin-top: 10px;
+  float: left;
+  margin-bottom: 20px;
+}
+#AddComment_TextField{
+  float: left;
+  
+}
+.css-nzinn5-MuiContainer-root{
+  padding-left: 0 !important;
+}
+.grade{
+  font-family: 'arial';
+  color: #1976d2;
+  text-align: right;
+  margin-right: 2%;
+  font-size: 30px;
+}
