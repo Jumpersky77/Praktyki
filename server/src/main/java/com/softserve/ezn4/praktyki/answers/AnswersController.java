@@ -17,27 +17,31 @@ public class AnswersController {
         this.readAnswerService = readAnswerService;
     }
 
-    @PostMapping("/teacher/{teacherID}")
+    @GetMapping("/teacher/{teacherID}")
     List<AnswerDTO> getAnswersByTeacherIDWithGrades(
-            @PathVariable("teacherID") Long teacherID,
-            @RequestBody AnswerFilter filter) {
-        return readAnswerService.findAnswersByTeacherWithCalculatedGrade(teacherID, filter);
+            @PathVariable("teacherID") Long teacherID
+            ) {
+        return readAnswerService.findAnswersByTeacherWithCalculatedGrade(teacherID);
+    }
+
+    @GetMapping("/{answerID}")
+    AnswerFullDTO getAnswersByID(
+            @PathVariable("answerID") Long answerID) {
+        return readAnswerService.findAnswerByID(answerID);
     }
 
     @GetMapping("/{answerID}/comments")
     public List<CommentDTO> getAnswerCommentsByID(@PathVariable("answerID") Long answerID) {
-        // TODO: Implement service and controller
         return readAnswerService.findAnswerCommentsByID(answerID);
     }
 
     @PostMapping("/{answerID}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public void addCommentByAnswerID(
-            @PathVariable("answerID") Long answerID,
+
             @RequestBody CommentInboundDTO commentInbound) {
         // TODO: Implement add comment
-        addAnswerService.addComment(answerID, commentInbound);
-
+        addAnswerService.addComment(commentInbound);
     }
 
     @PostMapping

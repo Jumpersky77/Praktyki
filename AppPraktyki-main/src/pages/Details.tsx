@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
+import "../style/styleR.css";
 
+import AddComment from "../components/AddComment";
 const _details = [
   {
     id: "0",
@@ -39,12 +41,11 @@ const _comments = [
 ];
 
 const commentblock = (id: number, aid: number) => {
-  if (_comments[id].id_details == aid) {
+  if (_comments[id].id_details === aid) {
     return (
-      <div>
-        <div>{_comments[id].user_name}</div>
-        <div>{_comments[id].Text}</div>
-        <br />
+      <div className="CommentContainer">
+        <div className="user_name">{_comments[id].user_name}</div>
+        <div className="Text">{_comments[id].Text}</div>
       </div>
     );
   }
@@ -57,12 +58,21 @@ const Details = () => {
   return (
     <>
       <div>
-        <h2>{_details[answerID].name}</h2>
+        <h2 className="title">{_details[answerID].name}</h2>
       </div>
-      <div>{_details[answerID].text}</div>
-      <h4>{_details[answerID].rating}</h4>
-      <div>{_comments.map((com, index) => commentblock(index, answerID))}</div>
+      <div className="subtitle">{_details[answerID].text}</div>
+
+      <h4 className="grade">Ocena: {_details[answerID].rating}</h4>
+      <h2 >Komentarze</h2>
+      <div>
+        <AddComment></AddComment>
+      </div>
+      
+      <div>
+        {_comments.map((com, index) => commentblock(index, answerID))}
+      </div>
     </>
   );
 };
+
 export default Details;

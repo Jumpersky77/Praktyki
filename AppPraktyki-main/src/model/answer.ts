@@ -1,8 +1,9 @@
-import { AnswerType } from "./answer-type";
 
-export interface Answer {
+
+export interface AnswerModel {
     id: number;
-    type: AnswerType;
+    type: string;
+    title: string,
     studentName: string;
     rate: number
 }

@@ -11,13 +11,15 @@ public class ReadAnswerService {
     public ReadAnswerService(AnswerDAO answerDAO) {
         this.answerDAO = answerDAO;
     }
-    List<AnswerDTO> findAnswersByTeacherWithCalculatedGrade(Long teacherID, AnswerFilter filter) {
+    List<AnswerDTO> findAnswersByTeacherWithCalculatedGrade(Long teacherID) {
         return answerDAO.findAnswersByTeacher(teacherID);
     }
 
+    AnswerFullDTO findAnswerByID(Long answerID) {
+        return answerDAO.findAnswerById(answerID);
+    }
+
     List<CommentDTO> findAnswerCommentsByID(Long answerID) {
-        return List.of(
-                new CommentDTO( "Milosz", 7.6, "Dobra robota!"),
-                new CommentDTO( "Bartosz", 8.9, "Super!"));
+        return answerDAO.findCommentsByAnswerID(answerID);
     }
 }

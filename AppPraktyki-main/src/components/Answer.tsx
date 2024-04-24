@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 
-type Props = { id: string, name: string, author: string, rating: string, onAnswerClick: (id: string) => void }
+type Props = { id: string, name: string, author: string, rating: number, onAnswerClick: (id: string) => void }
 const Answer = (props : Props) => {
     return (
             <div>
