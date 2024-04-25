@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import "../style/styleR.css";
 
 import AddComment from "../components/AddComment";
+import AddGrade from "../components/AddGrade";
 const _details = [
   {
     id: "0",
@@ -63,6 +64,9 @@ const Details = () => {
       <div className="subtitle">{_details[answerID].text}</div>
 
       <h4 className="grade">Ocena: {_details[answerID].rating}</h4>
+      <div className="add-grade-container">
+        <AddGrade></AddGrade>
+      </div>
       <h2 >Komentarze</h2>
       <div>
         <AddComment></AddComment>
