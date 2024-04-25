@@ -62,9 +62,10 @@ public class AnswerDAO {
 
     public AnswerFullDTO findAnswerById(Long answerID) {
         var sql = """
-                SELECT a.id, s.slogin, a.grade, a.text_p, a.text_a, a.answer_type
-                FROM answers  a
+                SELECT a.id, s.slogin, a.grade, a.text_p, a.text_a, a.answer_type, i.path
+                FROM answers a
                 INNER JOIN student s ON s.id = a.student_id
+                left join image i on i.id_answer = a.id
                 WHERE a.id = ?
                 """;
         return jdbcTemplate.queryForObject(sql, new Object[]{answerID}, new AnswerFullMapper());
