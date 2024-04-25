@@ -63,14 +63,14 @@ const Details = () => {
       <div className="subtitle">{_details[answerID].text}</div>
 
       <h4 className="grade">Ocena: {_details[answerID].rating}</h4>
-      <h2 >Komentarze</h2>
-      <div>
-        <AddComment></AddComment>
-      </div>
-      
-      <div>
-        {_comments.map((com, index) => commentblock(index, answerID))}
-      </div>
+
+        <h2 className="CommentComponent">Komentarze</h2>
+        <div className="CommentComponent">
+          <AddComment></AddComment>
+        </div>
+        <div className="CommentComponent">
+          {_comments.map((com, index) => commentblock(index, answerID))}
+        </div>
     </>
   );
 };
