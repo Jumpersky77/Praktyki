@@ -15,7 +15,7 @@ class AnswerServ {
         return axios.post(API_URL + "/grade/"+answerID, obj);
     }
     saveComment(comment:any){
-        return axios.post(API_URL + `/answers/${comment.answerID}/comments`, comment)
+        return axios.post(API_URL + `/answers/${comment.answerID}/comments`, comment);
     }
 }
 
