@@ -5,5 +5,5 @@ export interface AnswerModel {
     type: string;
     title: string,
     studentName: string;
-    rate: number
+    grade: number
 }
