@@ -3,6 +3,9 @@ import "../style/styleR.css";
 import { useParams } from 'react-router-dom';
 import AddComment from "../components/AddComment";
 import AddGrade from "../components/AddGrade";
+import { detailsModel } from "../model/details";
+import { Await } from "react-router-dom";
+import React from "react";
 const _details = [
   {
     id: "0",
@@ -52,6 +55,14 @@ const commentblock = (id: number, aid: number) => {
   }
 };
 
+const BASE_URL = "http://localhost:8080";
+
+async function fetchAnswer(answerID:number) {
+  const response = await fetch(`${BASE_URL}/answers/${answerID}`);
+  const body: detailsModel = await response.json()
+  return body;
+};
+
 const Details = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -59,22 +70,37 @@ const Details = () => {
   const answerID = parseInt(id || '0');
   return (
     <>
-      <div>
-        <h2 className="title">{_details[answerID].name}</h2>
-      </div>
-      <div className="subtitle">{_details[answerID].text}</div>
-
-      <div className="add-grade-container">
-      <h4 className="grade">Ocena: {_details[answerID].rating}</h4>
-        <AddGrade answerID={answerID}></AddGrade>
-      </div>
-        <h2 className="CommentComponent">Komentarze</h2>
-        <div className="CommentComponent">
-          <AddComment></AddComment>
-        </div>
-        <div className="CommentComponent">
-          {_comments.map((com, index) => commentblock(index, answerID))}
-        </div>
+    <React.Suspense>
+      <Await
+        resolve={fetchAnswer(answerID)}
+        children={(Answer: detailsModel) => {
+          return (
+              <>
+                <div id="detailsContainer">
+                  <div>
+                    <h2 className="title">{Answer.title}</h2>
+                  </div>
+                  <div className="subtitle">
+                    {Answer.text}
+                  </div>
+                  {/* zdjęcia */}
+                </div>
+                <div className="add-grade-container">
+                  <h4 className="grade">Ocena: {Math.round(Answer.grade * 10) / 10}</h4>
+                  <AddGrade answerID={answerID}></AddGrade>
+                </div>
+                  <h2 className="CommentComponent">Komentarze</h2>
+                  <div className="CommentComponent">
+                    <AddComment></AddComment>
+                  </div>
+                  <div className="CommentComponent">
+                    {_comments.map((com, index) => commentblock(index, answerID))}
+                  </div>
+              </>
+          );
+        }}
+      ></Await>
+    </React.Suspense>
     </>
   );
 };
