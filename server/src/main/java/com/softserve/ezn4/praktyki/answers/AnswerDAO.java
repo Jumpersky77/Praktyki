@@ -25,7 +25,7 @@ public class AnswerDAO {
 
     public List<AnswerDTO> findAnswersByTeacher(Long teacherID){
         var sql = """
-            SELECT answers.id, student.slogin, grade / 10, text_p, answer_type
+            SELECT answers.id, student.slogin, grade, text_p, answer_type
             FROM answers
             INNER JOIN student ON student.id = answers.student_id
             WHERE id_teachers = ?
