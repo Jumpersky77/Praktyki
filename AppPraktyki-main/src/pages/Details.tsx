@@ -63,8 +63,10 @@ const Details = () => {
       </div>
       <div className="subtitle">{_details[answerID].text}</div>
 
+      <div className="add-grade-container">
       <h4 className="grade">Ocena: {_details[answerID].rating}</h4>
-
+        <AddGrade></AddGrade>
+      </div>
         <h2 className="CommentComponent">Komentarze</h2>
         <div className="CommentComponent">
           <AddComment></AddComment>
@@ -72,17 +74,6 @@ const Details = () => {
         <div className="CommentComponent">
           {_comments.map((com, index) => commentblock(index, answerID))}
         </div>
-      <div className="add-grade-container">
-        <AddGrade></AddGrade>
-      </div>
-      <h2 >Komentarze</h2>
-      <div>
-        <AddComment></AddComment>
-      </div>
-      
-      <div>
-        {_comments.map((com, index) => commentblock(index, answerID))}
-      </div>
     </>
   );
 };
