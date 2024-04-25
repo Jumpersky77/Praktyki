@@ -54,7 +54,7 @@ const AddAnswer = () => {
     Object.entries(Answer).forEach((entry) => {
       data.append(entry[0], entry[1] as string);
     });
-    console.log(Object.fromEntries(data.entries()));
+    console.log(Object.fromEntries(data.entries()), "e");
     AnswerServ.saveAnswer(data)
       .then((res) => {
         setAnswer({

@@ -136,5 +136,49 @@ margin-bottom: 10px;
   color: #1976d2;
   text-align: right;
   margin-right: 2%;
+  margin: 20px;
   font-size: 30px;
+}
+.grade-input{
+  width: 50px;
+  margin: 10px;
+  font-size: 26px;
+  border-radius: 3px;
+  border: 1px solid gray;
+  box-shadow: 2px 2px 2px rgb(184, 184, 184);
+  text-align: left;
+}
+#add-grade-button{
+  margin-bottom: 5px;
+}
+.add-grade-container{
+  position: relative;
+  width: 95%;
+}
+#add-grade{
+  position: relative;
+  float: right;
+  width: fit-content;
+}
+
+.CommentComponent{
+  margin-left: 3%;
+}
+/* #detailsContainer{
+  width: 40%;
+  align-self: center;
+}  */
+
+.answer-text{
+  width: fit-content;
+  padding: 20px;
+  margin: auto;
+  font-family: 'arial';
+  color: #000000;
+  text-align: center;
+  border: 1px solid rgb(184, 184, 184);
+  border-radius: 2px;
+  box-shadow: 3px 3px 3px gray;
+  letter-spacing: normal;
+  font-size: 24px;
 }

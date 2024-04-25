@@ -121,7 +121,7 @@ const Answers = () => {
               id={String(answer.id)}
               name={answer.title}
               author={answer.studentName}
-              rating={answer.rate}
+              rating={answer.grade}
               key={answer.id}
               onAnswerClick={(answerID) => navigate.toDetailsPage(answerID)}
             />
