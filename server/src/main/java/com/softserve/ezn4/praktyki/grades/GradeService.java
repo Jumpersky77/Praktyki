@@ -1,10 +1,6 @@
 package com.softserve.ezn4.praktyki.grades;
 
-import com.softserve.ezn4.praktyki.answers.AnswerDAO;
-import com.softserve.ezn4.praktyki.answers.AnswerInboundDTO;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 public class GradeService {
@@ -14,7 +10,6 @@ public class GradeService {
     }
 
     public void addGrade(GradeDTO grade) {
-        double avgGrade = gradeDAO.countAvgGrade(grade.answerID());
 
         gradeDAO.addGrade(
                 grade.studentID(),
@@ -22,6 +17,7 @@ public class GradeService {
                 grade.grade()
         );
 
+        double avgGrade = gradeDAO.countAvgGrade(grade.answerID());
         gradeDAO.addAvgGrade(
                 grade.answerID(),
                 avgGrade
