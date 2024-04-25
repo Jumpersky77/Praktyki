@@ -1,6 +1,5 @@
 package com.softserve.ezn4.praktyki.answers;
 
-import com.softserve.ezn4.praktyki.teachers.TeacherMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,18 +14,18 @@ public class AnswerDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int insertAnswer(Long studentID, Long teachersID, Long subjectID, String textA, String textP, double grade, Date date, AnswerType type) {
+    public void insertAnswer(Long studentID, Long teachersID, Long subjectID, String textA, String textP, double grade, Date date, AnswerType type) {
         var sql = """
                 INSERT INTO answers
                 (student_id, id_teachers, id_subject, text_a, text_p, grade, add_data, answer_type)
                 VALUES (?,?,?,?,?,?,?,?)
                  """;
-        return jdbcTemplate.update(sql, studentID, teachersID, subjectID, textA, textP, grade, new java.sql.Date(date.getTime()), type.name());
+        jdbcTemplate.update(sql, studentID, teachersID, subjectID, textA, textP, grade, new java.sql.Date(date.getTime()), type.name());
     }
 
     public List<AnswerDTO> findAnswersByTeacher(Long teacherID){
         var sql = """
-            SELECT answers.id, student.slogin, grade, text_p, answer_type
+            SELECT answers.id, student.slogin, grade / 10, text_p, answer_type
             FROM answers
             INNER JOIN student ON student.id = answers.student_id
             WHERE id_teachers = ?
@@ -54,12 +53,12 @@ public class AnswerDAO {
         return jdbcTemplate.query(sql,new CommentMapper(), answerID);
     }
 
-    public int insertComment(Long studentID, Long answerID, String comment) {
+    public void insertComment(Long studentID, Long answerID, String comment) {
         var sql = """
                 INSERT INTO comments
                 (id_student, id_answer, comment_text)
                 VALUES (?,?,?)
                  """;
-        return jdbcTemplate.update(sql, studentID, answerID, comment);
+        jdbcTemplate.update(sql, studentID, answerID, comment);
     }
 }
