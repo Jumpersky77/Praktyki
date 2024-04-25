@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import "../style/styleR.css";
 
 import AddComment from "../components/AddComment";
+import AddGrade from "../components/AddGrade";
 const _details = [
   {
     id: "0",
@@ -62,15 +63,17 @@ const Details = () => {
       </div>
       <div className="subtitle">{_details[answerID].text}</div>
 
+      <div className="add-grade-container">
       <h4 className="grade">Ocena: {_details[answerID].rating}</h4>
-      <h2 >Komentarze</h2>
-      <div>
-        <AddComment></AddComment>
+        <AddGrade></AddGrade>
       </div>
-      
-      <div>
-        {_comments.map((com, index) => commentblock(index, answerID))}
-      </div>
+        <h2 className="CommentComponent">Komentarze</h2>
+        <div className="CommentComponent">
+          <AddComment></AddComment>
+        </div>
+        <div className="CommentComponent">
+          {_comments.map((com, index) => commentblock(index, answerID))}
+        </div>
     </>
   );
 };
