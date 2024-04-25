@@ -3,6 +3,12 @@ import axios from "axios";
 const API_URL = "http://localhost:8080";
 
 class AnswerServ {
+  saveAnswer(answer: FormData) {
+    return fetch(`${API_URL}/answers`, {
+      body: answer,
+      method: "POST",
+    });
+  }
     saveAnswer(answer:any) {
         return axios.post(API_URL + "/answers", answer);
     }
@@ -19,4 +25,4 @@ class AnswerServ {
     }
 }
 
-export default new AnswerServ
+export default new AnswerServ();

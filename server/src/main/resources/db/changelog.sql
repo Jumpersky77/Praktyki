@@ -61,7 +61,7 @@ CREATE TABLE grades (
 
 CREATE TABLE image (
 	id_answer int4 NULL,
-	raster oid NULL,
+	path varchar(50) NULL,
 	id SERIAL NOT NULL,
 	CONSTRAINT image_pkey PRIMARY KEY (id)
 );
