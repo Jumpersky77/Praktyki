@@ -102,10 +102,10 @@
 .CommentContainer {
   border: 1px solid #ccc;
   border-radius: 5px;
+  height: auto;
   padding: 10px;
   margin-bottom: 10px;
-  width: 20%;
-  min-width: 150px;
+  width: 40%;
 }
 
 .CommentContainer .user_name {
@@ -114,14 +114,21 @@
 
 
 #Dodaj_Komentarz{
-float: left;
 margin-bottom: 10px;
+text-align: left;
+}
 
+.css-nzinn5-MuiContainer-root {
+  margin-left: 0 !important;
+}
+
+#comment-add-container {
+  position: relative;
+  
 }
 
 #AddComment_Button{
   margin-top: 10px;
-  float: left;
   margin-bottom: 20px;
 }
 #AddComment_TextField{
@@ -181,4 +188,9 @@ margin-bottom: 10px;
   box-shadow: 3px 3px 3px gray;
   letter-spacing: normal;
   font-size: 24px;
+}
+
+.Text {
+  text-wrap: wrap;
+  max-width: 100%;
 }

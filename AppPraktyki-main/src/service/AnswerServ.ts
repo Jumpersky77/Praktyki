@@ -9,9 +9,6 @@ class AnswerServ {
       method: "POST",
     });
   }
-    saveAnswer(answer:any) {
-        return axios.post(API_URL + "/answers", answer);
-    }
     saveGrade(grade:number, answerID:number) {
         const obj = {
             studentID: 1,
@@ -21,7 +18,7 @@ class AnswerServ {
         return axios.post(API_URL + "/grade/"+answerID, obj);
     }
     saveComment(comment:any){
-        return axios.post(API_URL + `/answers/${comment.answerID}/comments`, comment)
+        return axios.post(API_URL + `/answers/${comment.answerID}/comments`, comment);
     }
 }
 

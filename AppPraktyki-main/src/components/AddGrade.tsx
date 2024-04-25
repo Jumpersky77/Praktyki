@@ -24,6 +24,7 @@ function AddGrade(props: Props) {
         if(grade >= 1 && grade <= 10) {
             AnswerServ.saveGrade(grade, answerID);
         }
+        window. location. reload();
     }
     return (
         <div id="add-grade">

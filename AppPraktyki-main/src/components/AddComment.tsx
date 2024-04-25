@@ -19,7 +19,6 @@ function AddComments(props:Props){
     const handleCommentChange = (e:any)=>{
         const value= e.target.value;
         setComment({ ...Comment, [e.target.name]: value });
-        console.log(Comment)
     };
     const addComment= (e:any)=>{
         e.preventDefault();
@@ -33,7 +32,7 @@ function AddComments(props:Props){
         }).catch((error) => {
             console.log(error);
         });
-
+        window. location. reload();
     };
     return (
             <div id="Dodaj_Komentarz">

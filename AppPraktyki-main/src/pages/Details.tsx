@@ -85,7 +85,9 @@ const Details = () => {
                 </div>
                 <div className="CommentComponent">
                   <h2>Komentarze</h2>
-                  <AddComment studentID={1} answerID={Answer.id} />
+                  <div id="comment-add-container">
+                    <AddComment studentID={1} answerID={Answer.id}></AddComment>
+                  </div>
                   {comments.map((comment, index) => (
                     <div key={index} className="CommentContainer">
                       <div className="user_name">{comment.studentName}</div>
