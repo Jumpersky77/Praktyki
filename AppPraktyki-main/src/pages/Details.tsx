@@ -91,7 +91,7 @@ const Details = () => {
                 </div>
                   <h2 className="CommentComponent">Komentarze</h2>
                   <div className="CommentComponent">
-                    <AddComment></AddComment>
+                    <AddComment studentID={1} answerID={Answer.id} />
                   </div>
                   <div className="CommentComponent">
                     {_comments.map((com, index) => commentblock(index, answerID))}

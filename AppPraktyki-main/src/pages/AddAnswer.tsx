@@ -25,8 +25,6 @@ import FormLabel from "@mui/material/FormLabel";
 import { useAppNavigation } from "../router/router";
 import { SubjectTeacher } from "../model/subject-teacher";
 import AnswerServ from "../service/AnswerServ";
-import { Url } from "url";
-import { blob } from "stream/consumers";
 const AddAnswer = () => {
 
   const location = useLocation();
@@ -47,15 +45,24 @@ const AddAnswer = () => {
     const value = e.target.value;
     setAnswer({ ...Answer, [e.target.name]: value })
   };
-  const handleAddAnswer = async (e:any) => {
+  const handleAddAnswer = (e:any) => {
     e.preventDefault();
-    const [blob] = previewImages.map((img)=>fetch(img).then((res)=>res.blob()));
     const data = new FormData();
-    data.append("img", await blob);
+    previewImages.map((URL, index) => {
+      fetch(URL)
+        .then(res => res.blob())
+        .then(blob => {
+          data.append("img" + index, blob);
+          console.log(blob)
+          
+        })
+        .catch(error => console.error("Błąd: ", error));
+    });
+    console.log(Object.fromEntries(data.entries()), "e2");
     Object.entries(Answer).forEach((entry)=>{
       data.append(entry[0], entry[1] as string);
     });
-    console.log(Object.fromEntries(data.entries()));
+    console.log(Object.fromEntries(data.entries()), "e");
     AnswerServ.saveAnswer(data)
         .then((res) => {
             setAnswer({
