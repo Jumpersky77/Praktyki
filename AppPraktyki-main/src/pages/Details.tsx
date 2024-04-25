@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import "../style/styleR.css";
-
+import { useParams } from 'react-router-dom';
 import AddComment from "../components/AddComment";
 import AddGrade from "../components/AddGrade";
 const _details = [
@@ -55,7 +55,8 @@ const commentblock = (id: number, aid: number) => {
 const Details = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const answerID = Number(searchParams.get("answerid"));
+  const { id } = useParams<{ id: string }>();
+  const answerID = parseInt(id || '0');
   return (
     <>
       <div>
@@ -65,7 +66,7 @@ const Details = () => {
 
       <div className="add-grade-container">
       <h4 className="grade">Ocena: {_details[answerID].rating}</h4>
-        <AddGrade></AddGrade>
+        <AddGrade answerID={answerID}></AddGrade>
       </div>
         <h2 className="CommentComponent">Komentarze</h2>
         <div className="CommentComponent">

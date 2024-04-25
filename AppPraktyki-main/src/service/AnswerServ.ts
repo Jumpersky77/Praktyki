@@ -5,6 +5,14 @@ class AnswerServ {
     saveAnswer(answer:any) {
         return axios.post(API_URL + "/answers", answer);
     }
+    saveGrade(grade:number, answerID:number) {
+        const obj = {
+            studentID: 1,
+            answerID: answerID,
+            grade: grade,
+        }
+        return axios.post(API_URL + "/grade/"+answerID, obj);
+    }
 }
 
 export default new AnswerServ
