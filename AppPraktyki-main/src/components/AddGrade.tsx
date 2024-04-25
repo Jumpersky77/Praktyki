@@ -20,7 +20,8 @@ function AddGrade(props: Props) {
     const [input, setInput] = useState("");
     async function handleAddGrade(answerID: number) {
         const grade = parseInt(input);
-        if(grade >= 1 && grade <= 10 && grade % 2 == 0 || grade % 2 == 1) {
+        console.log(grade);
+        if(grade >= 1 && grade <= 10) {
             AnswerServ.saveGrade(grade, answerID);
         }
     }
