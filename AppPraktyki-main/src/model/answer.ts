@@ -1,9 +1,7 @@
-
-
 export interface AnswerModel {
-    id: number;
-    type: string;
+    id: number,
+    type: string,
     title: string,
-    studentName: string;
+    studentName: string,
     grade: number
 }

@@ -168,3 +168,17 @@ margin-bottom: 10px;
   width: 40%;
   align-self: center;
 }  */
+
+.answer-text{
+  width: fit-content;
+  padding: 20px;
+  margin: auto;
+  font-family: 'arial';
+  color: #000000;
+  text-align: center;
+  border: 1px solid rgb(184, 184, 184);
+  border-radius: 2px;
+  box-shadow: 3px 3px 3px gray;
+  letter-spacing: normal;
+  font-size: 24px;
+}
