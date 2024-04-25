@@ -11,7 +11,7 @@ public class GradeDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void addGrade(Long studentID, Long answerID, double grade) {
+    public void addGrade(Long studentID, Long answerID, byte grade) {
         var sql = """
                 INSERT INTO grades
                 (id_student, id_answer, grade)
