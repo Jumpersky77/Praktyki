@@ -64,6 +64,14 @@ const Details = () => {
       <div className="subtitle">{_details[answerID].text}</div>
 
       <h4 className="grade">Ocena: {_details[answerID].rating}</h4>
+
+        <h2 className="CommentComponent">Komentarze</h2>
+        <div className="CommentComponent">
+          <AddComment></AddComment>
+        </div>
+        <div className="CommentComponent">
+          {_comments.map((com, index) => commentblock(index, answerID))}
+        </div>
       <div className="add-grade-container">
         <AddGrade></AddGrade>
       </div>

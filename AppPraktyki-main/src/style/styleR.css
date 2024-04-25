@@ -160,3 +160,7 @@ margin-bottom: 10px;
   float: right;
   width: fit-content;
 }
+
+.CommentComponent{
+  margin-left: 3%;
+}
