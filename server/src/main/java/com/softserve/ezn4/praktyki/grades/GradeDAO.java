@@ -1,5 +1,6 @@
 package com.softserve.ezn4.praktyki.grades;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -29,7 +30,7 @@ public class GradeDAO {
         return jdbcTemplate.queryForObject(sql, new Object[]{answerID}, Double.class);
     }
 
-    public void addAvgGrade(Long answerID, double grade){
+    public void updateAvgGrade(Long answerID, double grade){
         var sql = """
             UPDATE answers
             SET grade = ?
@@ -38,4 +39,28 @@ public class GradeDAO {
         jdbcTemplate.update(sql, grade, answerID);
     }
 
+    public boolean hasExistingGrade(Long studentID, Long answerID) {
+        try {
+            var sql = """
+            SELECT COUNT(*)
+            FROM grades
+            WHERE id_student = ?
+            AND id_answer = ?
+            """;
+            int count = jdbcTemplate.queryForObject(sql, new Object[]{studentID, answerID}, Integer.class);
+            return count > 0;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
+    }
+
+    public void updateGrade(Long answerID, Long studentID, double grade){
+        var sql = """
+            UPDATE grades
+            SET grade = ?
+            WHERE id_answer = ?
+            AND id_student = ?
+             """;
+        jdbcTemplate.update(sql, grade, answerID, studentID);
+    }
 }

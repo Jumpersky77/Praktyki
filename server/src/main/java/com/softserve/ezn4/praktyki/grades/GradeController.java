@@ -15,9 +15,8 @@ public class GradeController {
 
     @PostMapping("/{answerID}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCommentByAnswerID(
+    public void addGradeByAnswerID(
             @RequestBody GradeDTO grade) {
-        // TODO: Implement add comment
         gradeService.addGrade(grade);
     }
 }

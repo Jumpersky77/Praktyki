@@ -10,16 +10,21 @@ public class GradeService {
     }
 
     public void addGrade(GradeDTO grade) {
+        Long studentID = grade.studentID();
+        Long answerID = grade.answerID();
+        double newGrade = grade.grade();
 
-        gradeDAO.addGrade(
-                grade.studentID(),
-                grade.answerID(),
-                grade.grade()
-        );
+        boolean hasExistingGrade = gradeDAO.hasExistingGrade(studentID, answerID);
 
-        double avgGrade = gradeDAO.countAvgGrade(grade.answerID());
-        gradeDAO.addAvgGrade(
-                grade.answerID(),
+        if (hasExistingGrade) {
+            gradeDAO.updateGrade(answerID, studentID, newGrade);
+        } else {
+            gradeDAO.addGrade(studentID, answerID, (byte) newGrade);
+        }
+
+        double avgGrade = gradeDAO.countAvgGrade(answerID);
+        gradeDAO.updateAvgGrade(
+                answerID,
                 avgGrade
         );
     }
