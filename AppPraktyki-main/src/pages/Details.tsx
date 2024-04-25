@@ -80,7 +80,7 @@ const Details = () => {
                   <div>
                     <h2 className="title">{Answer.title}</h2>
                   </div>
-                  <div className="subtitle">
+                  <div className="answer-text">
                     {Answer.text}
                   </div>
                   {/* zdjęcia */}
