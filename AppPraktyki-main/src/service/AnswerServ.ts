@@ -9,9 +9,6 @@ class AnswerServ {
       method: "POST",
     });
   }
-    saveAnswer(answer:any) {
-        return axios.post(API_URL + "/answers", answer);
-    }
     saveGrade(grade:number, answerID:number) {
         const obj = {
             studentID: 1,
