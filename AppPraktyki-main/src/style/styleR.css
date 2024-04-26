@@ -52,6 +52,27 @@
     text-align: center;
     padding: 0;
   }
+  
+}
+@media only screen and (max-width: 560px) {
+  #ButtonAddAnswer {
+    margin: 10px;
+    width: fit-content;
+  }
+  #answers-page-mobile {
+    width: fit-content !important;
+    margin: auto !important;
+    text-align: center;
+    align-self: center;
+  }
+  #filter-container {
+    width: fit-content !important;
+    margin: auto !important;
+  }
+  #buttonAddAnswer-container{
+    width: fit-content !important;
+    margin: auto !important;
+  }
 }
 .title{
   font-family: 'arial';
@@ -169,6 +190,10 @@ text-align: left;
 .CommentComponent{
   margin-left: 3%;
 }
+/* #detailsContainer{
+  width: 40%;
+  align-self: center;
+}  */
 
 .answer-text{
   width: fit-content;
@@ -187,21 +212,4 @@ text-align: left;
 .Text {
   text-wrap: wrap;
   max-width: 100%;
-}
-
-.img-container{
-  display: flex;
-  align-self: center;
-  align-content: center;
-  flex-direction: column;
-  margin-top: 15px;
-}
-.img-container img{
-  margin-top: 15px;
-}
-
-
-#detailsContainer{
-  width: 40%;
-  align-self: center;
 }

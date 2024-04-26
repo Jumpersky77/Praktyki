@@ -86,13 +86,17 @@ const Answers = () => {
             Nauczyciel: {teacher.firstName + " " + teacher.lastName}
           </p>
         )}
-        <Button
-          id="ButtonAddAnswer"
-          variant="outlined"
-          onClick={() => navigate.toAddAnswerPage(subject, teacher)}
-        >
-          Dodaj odpowiedź
-        </Button>
+        <div id="answers-page-mobile">
+          <div id="buttonAddAnswer-container">
+            <Button
+              id="ButtonAddAnswer"
+              variant="outlined"
+              onClick={() => navigate.toAddAnswerPage(subject, teacher)}
+            >
+              Dodaj odpowiedź
+            </Button>
+          </div>
+        <div id="filter-container">
         <input
           className="SearchInput"
           type="text"
@@ -115,6 +119,7 @@ const Answers = () => {
           checked={searchTypes.includes("INNE")}
           onChange={() => handleCheckboxChange("INNE")}
         />
+        </div>
         {filteredAnswers.map((answer, index) => (
           <div className="BlockAnswersContainer" key={answer.id}>
             <Answer
@@ -128,6 +133,7 @@ const Answers = () => {
             <br />
           </div>
         ))}
+        </div>
       </div>
     </>
   );
