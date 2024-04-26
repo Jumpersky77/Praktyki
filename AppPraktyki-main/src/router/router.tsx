@@ -16,6 +16,7 @@ import Details from "../pages/Details";
 import Login from "../pages/Login";
 import { Subject } from "../model/subject";
 import { Teacher } from "../model/teacher";
+import { fullAnswerLoader } from "../loaders/full-answer.loader";
 
 const PAGES_URL = "/pages";
 
@@ -88,7 +89,11 @@ export const router = createBrowserRouter(
         <Route path="subjects" element={<Subjects />} />
         <Route path="teachers" element={<Teachers />} />
         <Route path="answers" element={<Answers />} />
-        <Route path="answers/:id" element={<Details />} />
+        <Route
+          path="answers/:id"
+          element={<Details />}
+          loader={fullAnswerLoader}
+        />
         <Route path="addanswer" element={<AddAnswer />} />
       </Route>
     </>

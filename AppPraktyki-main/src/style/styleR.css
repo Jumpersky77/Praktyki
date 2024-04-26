@@ -118,13 +118,11 @@ margin-bottom: 10px;
 text-align: left;
 }
 
-.css-nzinn5-MuiContainer-root {
-  margin-left: 0 !important;
-}
 
 #comment-add-container {
   position: relative;
-  
+  margin-left: 0 !important;
+  width: fit-content !important;
 }
 
 #AddComment_Button{
