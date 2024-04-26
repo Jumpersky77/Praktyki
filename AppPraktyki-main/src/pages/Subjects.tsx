@@ -28,6 +28,7 @@ const Subjects = () => {
           return (
             <>
               <h1 className="title">Lista Przedmiotów</h1>
+              <div className="SubjectContainer">
               {subjects.map((subject, index) => (
                 <div key={index} className="BlockContainer">
                   <Button
@@ -41,6 +42,7 @@ const Subjects = () => {
                   </Button>
                 </div>
               ))}
+              </div>
             </>
           );
         }}

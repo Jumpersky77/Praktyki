@@ -34,6 +34,7 @@ const Teachers = () => {
             <>
               <h1 className="title">Lista Nauczycieli</h1>
               {subject && <p className="subtitle">Przedmiot: {subject.name}</p>}
+              <div className="TeacherContainer">
               {teachers.map((teacher, index) => (
                 <div key={index} className="BlockContainer">
                   <Button
@@ -47,6 +48,7 @@ const Teachers = () => {
                   </Button>
                 </div>
               ))}
+             </div> 
             </>
           );
         }}
