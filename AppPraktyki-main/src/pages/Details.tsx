@@ -7,27 +7,7 @@ import { detailsModel } from "../model/details";
 import { CommentModel } from "../model/comment";
 import { Await } from "react-router-dom";
 import React from "react";
-
-const _comments = [
-  {
-    id_User: 0,
-    user_name: "MiloszTT",
-    Text: "Dobra robota  d=====(￣▽￣*)b",
-    id_details: 0,
-  },
-  {
-    id_User: 1,
-    user_name: "BartłomiejP",
-    Text: "odp a w z. 1 w gr A jest zle",
-    id_details: 0,
-  },
-  {
-    id_User: 2,
-    user_name: "Skowronek_andrzej",
-    Text: "jakis kreatywny komentarz",
-    id_details: 1,
-  },
-];
+import Comments from "../components/Comments";
 
 const BASE_URL = "http://localhost:8080";
 
@@ -46,20 +26,20 @@ async function fetchComments(answerID:number): Promise<CommentModel[]> {
 
 const Details = () => {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
   const { id } = useParams<{ id: string }>();
   const answerID = parseInt(id || '0');
   const [comments, setComments] = React.useState<CommentModel[]>([]);
 
+  const fetchCommentsData = async () => {
+    try {
+      const commentsData = await fetchComments(answerID);
+      setComments(commentsData);
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+    }
+  };
+
   React.useEffect(() => {
-    const fetchCommentsData = async () => {
-      try {
-        const commentsData = await fetchComments(answerID);
-        setComments(commentsData);
-      } catch (error) {
-        console.error('Error fetching comments:', error);
-      }
-    };
     fetchCommentsData();
   }, [answerID]);
 
@@ -86,14 +66,11 @@ const Details = () => {
                 <div className="CommentComponent">
                   <h2>Komentarze</h2>
                   <div id="comment-add-container">
-                    <AddComment studentID={1} answerID={Answer.id}></AddComment>
+                    <AddComment studentID={1} answerID={Answer.id} ></AddComment>
                   </div>
-                  {comments.map((comment, index) => (
-                    <div key={index} className="CommentContainer">
-                      <div className="user_name">{comment.studentName}</div>
-                      <div className="Text">{comment.commentText}</div>
-                    </div>
-                  ))}
+                  <div>
+                    <Comments comments={comments} />
+                  </div>
                 </div>
               </>
             );

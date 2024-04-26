@@ -8,6 +8,7 @@ import {
 import { common } from '@mui/material/colors';
 import AnswerServ from "../service/AnswerServ";
 
+
 type Props = {studentID:number, answerID:number};
 function AddComments(props:Props){
     const [Comment, setComment]= useState({
@@ -32,7 +33,6 @@ function AddComments(props:Props){
         }).catch((error) => {
             console.log(error);
         });
-        window. location. reload();
     };
     return (
             <div id="Dodaj_Komentarz">
