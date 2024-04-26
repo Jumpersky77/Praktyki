@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/answers")
@@ -59,8 +60,8 @@ public class AnswersController {
     }
 
     @GetMapping("/photos/{answerid}/{filename}")
-    public ResponseEntity<Resource> getImage(@PathVariable String answerid, @PathVariable String filename) {
-        Resource file = storageService.load(answerid, filename);
+    public ResponseEntity<Resource> getImage(@PathVariable Long answerid, @PathVariable String filename) {
+        Resource file = storageService.load(Objects.toString(answerid), filename);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);

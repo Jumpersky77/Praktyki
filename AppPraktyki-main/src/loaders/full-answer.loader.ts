@@ -1,11 +1,11 @@
 import { CommentModel } from "../model/comment";
-import { detailsModel } from "../model/details";
+import { DetailsModel } from "../model/details";
 
 const BASE_URL = "http://localhost:8080";
 
 async function fetchAnswer(answerID: number) {
   const response = await fetch(`${BASE_URL}/answers/${answerID}`);
-  const body: detailsModel = await response.json();
+  const body: DetailsModel = await response.json();
   return body;
 }
 async function fetchComments(answerID: number): Promise<CommentModel[]> {

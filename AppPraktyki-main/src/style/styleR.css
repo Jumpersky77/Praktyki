@@ -169,10 +169,6 @@ text-align: left;
 .CommentComponent{
   margin-left: 3%;
 }
-/* #detailsContainer{
-  width: 40%;
-  align-self: center;
-}  */
 
 .answer-text{
   width: fit-content;
@@ -191,4 +187,21 @@ text-align: left;
 .Text {
   text-wrap: wrap;
   max-width: 100%;
+}
+
+.img-container{
+  display: flex;
+  align-self: center;
+  align-content: center;
+  flex-direction: column;
+  margin-top: 15px;
+}
+.img-container img{
+  margin-top: 15px;
+}
+
+
+#detailsContainer{
+  width: 40%;
+  align-self: center;
 }

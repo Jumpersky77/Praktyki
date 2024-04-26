@@ -2,16 +2,19 @@ import { useLoaderData } from "react-router-dom";
 import "../style/styleR.css";
 import AddComment from "../components/AddComment";
 import AddGrade from "../components/AddGrade";
-import { detailsModel } from "../model/details";
+import { DetailsModel } from "../model/details";
 import { CommentModel } from "../model/comment";
 import Comments from "../components/Comments";
 import { useState } from "react";
 
+const BASE_URL = "http://localhost:8080";
+
 const Details = () => {
   const loaderData = useLoaderData() as {
-    answer: detailsModel;
+    answer: DetailsModel;
     comments: CommentModel[];
   };
+  console.log(loaderData)
   const answer = loaderData.answer;
   const [comments, setComments] = useState([...loaderData.comments]);
 
@@ -26,6 +29,11 @@ const Details = () => {
           <h2 className="title">{answer.title}</h2>
         </div>
         <div className="answer-text">{answer.text}</div>
+        <div className="img-container">
+          {answer.imagePaths.map((img, index) => (
+            <img src={`${BASE_URL}/answers${img}`} key={index}></img>
+          ))}
+        </div>
       </div>
       <div className="add-grade-container">
         <h4 className="grade">Ocena: {Math.round(answer.grade * 10) / 10}</h4>
