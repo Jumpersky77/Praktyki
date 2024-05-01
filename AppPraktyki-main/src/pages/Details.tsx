@@ -1,79 +1,60 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import Header from '../components/Header';
-import { List } from '@mui/material';
-import { Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import "../style/styleR.css";
+import AddComment from "../components/AddComment";
+import AddGrade from "../components/AddGrade";
+import { DetailsModel } from "../model/details";
+import { CommentModel } from "../model/comment";
+import Comments from "../components/Comments";
+import { useState } from "react";
 
-const _details = [{
-    id: "0",
-    name: "Równania kwadratowe",
-    author: "Miłosz",
-    rating: "7.6",
-    text: "Zad1: a, zad2: b",
-},
-{
-    id: "1",
-    name: "Planimetria",
-    author: "Bartosz",
-    rating: "4.9",
-    text: "Zad1: b, zad2: a",
-}]
-
-const _comments=[
-    {
-        id_User:0,
-        user_name: "MiloszTT",
-        Text: "Dobra robota  d=====(￣▽￣*)b",
-        id_details:0
-    },
-    {
-        id_User:1,
-        user_name: "BartłomiejP",
-        Text: "odp a w z. 1 w gr A jest zle",
-        id_details:0
-    },
-    {
-        id_User:2,
-        user_name: "Skowronek_andrzej",
-        Text: "jakis kreatywny komentarz",
-        id_details:1
-    }
-]
-
-const commentblock=(id:number, aid:number)=>{
-    if(_comments[id].id_details==aid){
-            return  (
-                <div >
-                    <div>{_comments[id].user_name}</div>
-                    <div>{_comments[id].Text}</div>
-                    <br />
-                </div>
-            )
-        }
-}
-
+const BASE_URL = "http://localhost:8080";
 
 const Details = () => {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const answerID=Number(searchParams.get('answerid'));
-    return (
-        <>
-            <Header accountName={"example"} subscriptionDaysLeft={"14"} />
-            <div>
-                <h2>{_details[answerID].name}</h2>
-            </div>
-            <div>
-                {_details[answerID].text}
-            </div>
-            <h4>{_details[answerID].rating}</h4>
-            <div>
-                {_comments.map((com, index) => (
-                    commentblock(index, answerID)
-            ))
-        }
-            </div>
-        </>
-    );
-}
-export default Details
+  const loaderData = useLoaderData() as {
+    answer: DetailsModel;
+    comments: CommentModel[];
+  };
+  console.log(loaderData)
+  const answer = loaderData.answer;
+  const [comments, setComments] = useState([...loaderData.comments]);
+
+  const setComment = (comment: CommentModel) => {
+    setComments([comment, ...comments]);
+  };
+
+  return (
+    <>
+      <div id="detailsContainer">
+        <div>
+          <h2 className="title">{answer.title}</h2>
+        </div>
+        <div className="answer-text">{answer.text}</div>
+        <div className="img-container">
+          {answer.imagePaths.map((img, index) => (
+            <img src={`${BASE_URL}/answers${img}`} key={index}></img>
+          ))}
+        </div>
+      </div>
+      <div className="add-grade-container">
+        <h4 className="grade">Ocena: {Math.round(answer.grade * 10) / 10}</h4>
+        <AddGrade answerID={answer.id}></AddGrade>
+      </div>
+      <div className="CommentComponent">
+        <h2>Komentarze</h2>
+        <div id="comment-add-container">
+          <AddComment
+            studentID={1}
+            answerID={answer.id}
+            studentName={answer.studentName}
+            onCommnetSet={setComment}
+          ></AddComment>
+        </div>
+        <div>
+          <Comments comments={comments} />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Details;

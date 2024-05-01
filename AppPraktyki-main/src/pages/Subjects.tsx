@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { Await, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Await } from "react-router-dom";
 import Button from "@mui/material/Button";
-import Header from "../components/Header";
 import "../style/styleR.css";
 import { Subject } from "../model/subject";
+import { useAppNavigation } from "../router/router";
 
 const BASE_URL = "http://localhost:8080";
 
-const fetchSubjects = () =>
-  fetch(`${BASE_URL}/subjects`).then(
-    (response) => response.json() as unknown as Subject[]
-  );
+const fetchSubjects = async () => {
+  const response = await fetch(`${BASE_URL}/subjects`);
+  const body: Subject[] = await response.json();
+  return body;
+};
 
 const Subjects = () => {
-  const navigate = useNavigate();
+  const navigate = useAppNavigation();
 
-  const handleSubjectClick = (subject: string) => {
-    navigate(`/teachers?subject=${subject}`);
+  const handleSubjectClick = (subject: Subject) => {
+    navigate.toTeacherPage(subject);
   };
 
   return (
@@ -26,8 +27,8 @@ const Subjects = () => {
         children={(subjects: Subject[]) => {
           return (
             <>
-              <Header accountName={"example"} subscriptionDaysLeft={"14"} />
               <h1 className="title">Lista Przedmiotów</h1>
+              <div className="SubjectContainer">
               {subjects.map((subject, index) => (
                 <div key={index} className="BlockContainer">
                   <Button
@@ -35,12 +36,13 @@ const Subjects = () => {
                     variant="outlined"
                     color="primary"
                     size="large"
-                    onClick={() => handleSubjectClick(subject.name)}
+                    onClick={() => handleSubjectClick(subject)}
                   >
                     {subject.name}
                   </Button>
                 </div>
               ))}
+              </div>
             </>
           );
         }}

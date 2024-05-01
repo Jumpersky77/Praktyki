@@ -1,77 +1,104 @@
-import Header from "../components/Header";
-import React from 'react';
-import { UserName } from "../App";
-import { useContext, useState } from "react";
+import React from "react";
+import { useState } from "react";
 import {
-    Avatar,
-    Box,
-    Button,
-    Container,
-    CssBaseline,
-    Grid,
-    TextField,
-    Typography,
-  } from "@mui/material";
-  import { Link } from "react-router-dom";
-  import { useLocation } from 'react-router-dom';
-  import { useNavigate } from 'react-router-dom';
-  import { styled } from '@mui/material/styles';
-  import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-  import Radio from '@mui/material/Radio';
-  import RadioGroup from '@mui/material/RadioGroup';
-  import FormControlLabel from '@mui/material/FormControlLabel';
-  import FormControl from '@mui/material/FormControl';
-  import FormLabel from '@mui/material/FormLabel';
-const AddAnswer=()=>{
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { useAppNavigation } from "../router/router";
+import { SubjectTeacher } from "../model/subject-teacher";
+import AnswerServ from "../service/AnswerServ";
 
-    const [title, setTitle] = useState("");
-    const [text, setText]= useState("");
-    
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const subject = searchParams.get('subject');
-    const teacher = searchParams.get('teacher');
-    
-    
-    
-    const VisuallyHiddenInput = styled('input')({
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'inset(50%)',
-        height: 1,
-        overflow: 'hidden',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        whiteSpace: 'nowrap',
-        width: 1,
+const AddAnswer = () => {
+  const location = useLocation();
+  const { teacher, subject } = location.state as SubjectTeacher;
+
+  const navigation = useAppNavigation();
+
+  const [Answer, setAnswer] = useState({
+    studentID: 1,
+    teacherID: teacher.id,
+    subjectID: subject.id,
+    answerQuestion: "",
+    answerResponse: "",
+    type: "",
+  });
+
+  const handleChange = (e: any) => {
+    const value = e.target.value;
+    setAnswer({ ...Answer, [e.target.name]: value });
+  };
+  const handleAddAnswer = async (e: any) => {
+    e.preventDefault();
+    const blobs = previewImages.map((img) =>
+      fetch(img).then((res) => res.blob())
+    );
+    const data = new FormData();
+    for await (const blob of blobs) {
+      data.append("photos", blob);
+    }
+    data.append("grade", "0.0");
+    Object.entries(Answer).forEach((entry) => {
+      data.append(entry[0], entry[1] as string);
+    });
+    console.log(Object.fromEntries(data.entries()), "e");
+    AnswerServ.saveAnswer(data)
+      .then((res) => {
+        setAnswer({
+          studentID: 1,
+          teacherID: teacher.id,
+          subjectID: subject.id,
+          answerQuestion: "",
+          answerResponse: "",
+          type: "",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
+  };
 
+  const [previewImages, setPreviewImages] = useState<string[]>([]);
 
-      const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const imageFiles = Array.from(files).filter((file) =>
+        file.type.startsWith("image")
+      );
+      const imageUrls = imageFiles.map((file) => URL.createObjectURL(file));
+      setPreviewImages((prevImages) => [...prevImages, ...imageUrls]);
+    }
+  };
 
-      const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (files) {
-          const imageFiles = Array.from(files).filter(file => file.type.startsWith('image'));
-          const imageUrls = imageFiles.map(file => URL.createObjectURL(file));
-          setPreviewImages(prevImages => [...prevImages, ...imageUrls]);
-        }
-      }
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
 
-       const [type, setType] = useState('');
-
-      const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setType((event.target as HTMLInputElement).value);
-      };
-
-      //console.log(title, type, previewImages)
-
-    const handleAddAnswer = async () => {};
-
-    return(
-        <>
-        <Header accountName={useContext(UserName)} subscriptionDaysLeft={"14"} />
-        <div>
+  return (
+    <>
+      <div>
         <Container maxWidth="xs">
           <CssBaseline />
           <Box
@@ -82,64 +109,96 @@ const AddAnswer=()=>{
               alignItems: "center",
             }}
           >
-            <Typography variant="h5">Przedmiot: {subject}</Typography>
-            <Typography variant="h5">Nauczyciel: {teacher}</Typography>
+            <Typography variant="h5">Przedmiot: {subject.name}</Typography>
+            <Typography variant="h5">
+              Nauczyciel: {teacher.firstName + " " + teacher.lastName}
+            </Typography>
             <Box sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
-                    name="title"
+                    name="answerQuestion"
                     required
                     fullWidth
                     id="title"
                     label="Tytuł"
                     autoFocus
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={(e) => handleChange(e)}
+                    value={Answer.answerQuestion}
                   />
                 </Grid>
-                
+
                 <Grid item xs={12}>
                   <TextField
+                    name="answerResponse"
                     id="outlined-multiline-flexible"
                     label="Tu możesz wpisać odpowiedzi"
                     multiline
                     fullWidth
-                    onChange={(e)=>setText(e.target.value)}
+                    onChange={(e) => handleChange(e)}
+                    value={Answer.answerResponse}
                   />
-
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Button
-                        fullWidth
-                        component="label"
-                        role={undefined}
-                        variant="contained"
-                        tabIndex={-1}
-                        startIcon={<CloudUploadIcon />}
-                        >
-                        Dodaj zdjęcia
-                        <VisuallyHiddenInput type="file" accept="image/*"  multiple onChange={handleFileChange}/>
-                    </Button> 
-                    {previewImages.map((imageUrl, index) => (
-                    <img key={index} src={imageUrl} alt={`Preview ${index}`} style={{ maxWidth: '100%', marginTop: '10px', display: 'block' }} />
-                    ))}
+                  <Button
+                    fullWidth
+                    component="label"
+                    role={undefined}
+                    variant="contained"
+                    tabIndex={-1}
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Dodaj zdjęcia
+                    <VisuallyHiddenInput
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handleFileChange}
+                    />
+                  </Button>
+                  {previewImages.map((imageUrl, index) => (
+                    <img
+                      key={index}
+                      src={imageUrl}
+                      alt={`Preview ${index}`}
+                      style={{
+                        maxWidth: "100%",
+                        marginTop: "10px",
+                        display: "block",
+                      }}
+                    />
+                  ))}
                 </Grid>
                 <Grid item xs={12}>
-                    <FormControl>
-                        <FormLabel id="demo-row-radio-buttons-group-label">Typ odpowiedzi</FormLabel>
-                        <RadioGroup
-                            row
-                            aria-labelledby="demo-row-radio-buttons-group-label"
-                            name="row-radio-buttons-group"
-                            onChange={handleRadioChange}
-                        >
-                            <FormControlLabel value="sprawdzian" control={<Radio />} label="Sprawdzian" />
-                            <FormControlLabel value="kartkówka" control={<Radio />} label="Kartkówka" />
-                            <FormControlLabel value="inne" control={<Radio />} label="Inne" />
-                        </RadioGroup>
-                    </FormControl>
+                  <FormControl>
+                    <FormLabel id="demo-row-radio-buttons-group-label">
+                      Typ odpowiedzi
+                    </FormLabel>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="type"
+                      defaultValue="unchecked"
+                      onChange={(e) => handleChange(e)}
+                    >
+                      <FormControlLabel
+                        value="SPRAWDZIAN"
+                        control={<Radio />}
+                        label="Sprawdzian"
+                      />
+                      <FormControlLabel
+                        value="KARTKÓWKA"
+                        control={<Radio />}
+                        label="Kartkówka"
+                      />
+                      <FormControlLabel
+                        value="INNE"
+                        control={<Radio />}
+                        label="Inne"
+                      />
+                    </RadioGroup>
+                  </FormControl>
                 </Grid>
               </Grid>
               <Button
@@ -152,15 +211,19 @@ const AddAnswer=()=>{
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link to={`/answers?subject=${subject}&teacher=${teacher}`}>Wróć do listy odpowiedzi</Link>
+                  <Link
+                    to={navigation.getAnswerPageLink(subject, teacher)}
+                    state={location.state}
+                  >
+                    Wróć do listy odpowiedzi
+                  </Link>
                 </Grid>
               </Grid>
             </Box>
           </Box>
         </Container>
-        </div>
-        
-        </>
-    );
-}
-export default AddAnswer
+      </div>
+    </>
+  );
+};
+export default AddAnswer;
